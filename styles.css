@@ -1,0 +1,39 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: rgb(255, 236, 236);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hero Section */
+.hero-section {
+  background: url('hero-image.webp') no-repeat center center/cover;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Cards */
+.card {
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Discussion Section */
+textarea {
+  resize: none;
+}
+
+/* Footer */
+footer {
+  margin-top: 20px;
+}
