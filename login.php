@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #494949;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      height: 80%;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Left Side - Dark */
+    .left-side {
+      background-color:rgb(0, 0, 0);
+      color: white;
+      width: 60%;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .left-side h1 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .form-group input {
+      width: 100%;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+      padding: 10px 30px 10px 30px;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .form-group input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-bottom: 1px solid white;
+    }
+
+    .form-group i {
+      position: absolute;
+      left: 0;
+      top: 12px;
+      color: white;
+    }
+
+    .form-group .eye-icon {
+      position: absolute;
+      right: 0;
+      top: 12px;
+      cursor: pointer;
+      color: white;
+    }
+    
+    .forgot-password {
+      position: absolute;
+      right: 0;
+      bottom: -20px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin: 20px 0 30px;
+    }
+
+    .checkbox-container input {
+      margin-right: 10px;
+    }
+
+    .checkbox-container label {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-sign-in {
+      background-color: #000;
+      color: white;
+      border: solid #FFFFFF 1px;
+      border-radius: 25px;
+      padding: 12px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-sign-in:hover {
+      background-color: #111;
+    }
+
+    /* Right Side - Light */
+    .right-side {
+      background-color: #e0e0e0;
+      width: 60%;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .right-side h1 {
+      font-size: 2.5rem;
+      color: #000;
+      margin-bottom: 30px;
+    }
+
+    .right-side p {
+      color: #333;
+      margin-bottom: 60px;
+      line-height: 1.6;
+    }
+
+    .signup-text {
+      margin-top: 60px;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .signup-link {
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .btn-signup {
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 15px;
+    }
+
+    /* Form icons */
+    .icon {
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .left-side,
+      .right-side {
+        width: 100%;
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" style="border-radius: 20px; overflow: hidden;">
+    <!-- Left Side - Sign In Form -->
+    <div class="left-side">
+      <h1>Sign in to your account</h1>
+
+      <form>
+        <div class="form-group">
+        <span class="icon">✉️</span>
+          <input type="email" placeholder="Email" required>
+        </div>
+
+        <div class="form-group">
+          <span class="icon">🔒</span>
+          <input type="password" id="password" placeholder="Password" required>
+          <span class="eye-icon" onclick="togglePassword()">👁️</span>
+          <a href="#" class="forgot-password">forgot password?</a>
+        </div>
+
+        <br>
+        <div class="checkbox-container">
+          <input type="checkbox" id="terms">
+          <label for="terms">I agree with the terms and conditions and privacy policy</label>
+        </div>
+
+        <button type="submit" class="btn-sign-in">Sign In</button>
+      </form>
+    </div>
+
+    <!-- Right Side - Welcome Section -->
+    <div class="right-side">
+      <h1>Welcome Back!</h1>
+      <p style="margin-bottom: 20px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+
+      <!-- Logo Section -->
+      <div>
+        <img src="logo.png" alt="Company Logo" style="max-width: 80px; height: auto;">
+      </div>
+
+      <!-- Sign Up Section -->
+      <div>
+        <p class="signup-text" style="margin-bottom: 10px;">Don't have an account? <a href="#" class="signup-link">Sign Up!</a></p>
+        <button class="btn-signup">Sign Up</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const passwordField = document.getElementById('password');
+      const eyeIcon = document.querySelector('.eye-icon');
+
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.textContent = '👁️';
+      } else {
+        passwordField.type = 'password';
+        eyeIcon.textContent = '👁️';
+      }
+    }
+  </script>
+</body>
+
+</html>
