@@ -1,5 +1,6 @@
 <style>
   .footer-5-column {
+    background-color: #dddddd;
     padding-top: 3rem;
     margin-top: 2rem;
   }
@@ -361,7 +362,7 @@
   }
 </style>
 
-<div class="footer-5-column" style="margin-top: 0.1rem; padding-top: 0.1rem;">
+<div class="footer-5-column" >
   <div class="footer-container">
     <div class="footer-navbar-container" style="margin-top: 0.1rem; padding-top: 0.1rem;">
       <div class="footer-company-details">

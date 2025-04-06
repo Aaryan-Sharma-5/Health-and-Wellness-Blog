@@ -4,33 +4,53 @@ include 'db.php';
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health & Wellness Blog</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
 
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Health & Wellness</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#articles">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#discussion">Discussion</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary text-white" href="#">Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .hero-section {
+            background: url('hero-image.webp') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .card {
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        textarea {
+            resize: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <?php
+    require 'navbar.php';
+    ?>
+
+
 
     <!-- Hero Section -->
     <header id="home" class="hero-section text-center text-white d-flex align-items-center">
@@ -56,8 +76,10 @@ include 'db.php';
             </div>
         </div>
         <br><br>
-        <div style="text-align: center;"><h3>Importance of Health</h3><br>
-        <p >Drawing on centuries of wisdom, Ayurveda doesn't just treat symptoms; it aims to identify and address the root cause of an imbalance, diving deeper into understanding the unique constitution (prakriti) of each individual. The science behind Ayurveda is rooted in natural principles, treating the body as a whole system and understanding how it interacts with its environment.The power of healing lies in a holistic approach, combining Ayurveda, Panchakarma, Colon Therapy, Homeopathy, Yoga, and a balanced diet. Ayurveda and Panchakarma detoxify and restore balance, while Colon Therapy and Homeopathy support the body's natural healing and Yoga harmonizes body and mind, and a balanced diet promotes vitality. Together, they offer a comprehensive path to long-term wellness. This holistic and preventive approach makes it highly effective for various chronic conditions, stress management, and enhancing overall quality of life. Ayurveda, often considered the mother of all healing sciences, provides the foundation for Panchakarma, Yoga, Colon Therapy, Homeopathy, and Diet Management, offering a comprehensive approach to holistic health.</p></div>
+        <div style="text-align: center;">
+            <h3>Importance of Health</h3><br>
+            <p>Drawing on centuries of wisdom, Ayurveda doesn't just treat symptoms; it aims to identify and address the root cause of an imbalance, diving deeper into understanding the unique constitution (prakriti) of each individual. The science behind Ayurveda is rooted in natural principles, treating the body as a whole system and understanding how it interacts with its environment.</p>
+        </div>
     </section>
 
     <!-- Articles Section -->
@@ -116,7 +138,7 @@ include 'db.php';
                 <span class="carousel-control-next-icon"></span>
             </a>
         </div>
-    </section>    
+    </section>
 
     <!-- Discussion Forum -->
     <section id="discussion" class="container py-5">
@@ -128,20 +150,43 @@ include 'db.php';
         <div id="discussionPosts" class="mt-4"></div>
     </section>
 
-    <!-- Footer -->
-    <footer class="text-center bg-dark text-white py-3">
-        <section id="newsletter" class="container py-5 text-center">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get weekly health tips directly in your inbox!</p>
-            <form>
-                <input type="email" class="form-control mb-3 w-50 mx-auto" placeholder="Enter your email">
-                <button class="btn btn-primary">Subscribe</button>
-            </form>
-        </section>    
-        <p>&copy; 2025 Health & Wellness Blog | All Rights Reserved</p>
-    </footer>
+    <?php
+    require 'footer.php';
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute("href")).scrollIntoView({
+                        behavior: "smooth"
+                    });
+                });
+            });
+
+            // Discussion Forum - Posting Comments
+            const postBtn = document.getElementById("postBtn");
+            const discussionText = document.getElementById("discussionText");
+            const discussionPosts = document.getElementById("discussionPosts");
+
+            postBtn.addEventListener("click", function() {
+                let text = discussionText.value.trim();
+                if (text === "") {
+                    alert("Please enter a message before posting.");
+                    return;
+                }
+
+                let postDiv = document.createElement("div");
+                postDiv.classList.add("card", "mt-3", "p-3");
+                postDiv.innerHTML = `<p>${text}</p>`;
+                discussionPosts.prepend(postDiv);
+
+                discussionText.value = "";
+            });
+        });
+    </script>
 </body>
+
 </html>
