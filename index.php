@@ -50,37 +50,62 @@ include 'db.php';
     require 'navbar.php';
     ?>
 
-
-
     <!-- Hero Section -->
-    <header id="home" class="hero-section text-center text-white d-flex align-items-center">
-        <div class="container">
-            <h1 class="display-4">Promoting a Healthier Life</h1>
-            <p class="lead">Discover health tips, fitness guides, and mental wellness advice.</p>
-            <a href="#articles" class="btn btn-light btn-lg">Explore Articles</a>
-        </div>
-    </header>
+    <section class="articles-section">
+  <div class="container text-center">
+    <h2 class="section-title">Explore Trending Wellness Articles</h2>
+    <p class="section-subtitle">Discover the latest insights in health and wellness.</p>
 
-    <!-- About Section -->
-    <section id="about" class="container py-5">
-        <h2 class="text-center mb-4">About Us</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <img src="about.webp" class="img-fluid" alt="About Us">
-            </div>
-            <div class="col-md-6">
-                <h3>Our Mission</h3>
-                <p>Our mission is to provide you with the best health and wellness advice to help you lead a healthier life. We believe that a healthy lifestyle is essential for overall well-being and happiness.</p>
-                <h3>Our Vision</h3>
-                <p>Our vision is to create a community of health-conscious individuals who are motivated to make positive changes in their lives. We aim to inspire and empower you to take control of your health.</p>
-            </div>
+    <div class="row justify-content-center mt-4">
+      <!-- Article Card 1 -->
+      <div class="col-md-4 mb-4">
+        <div class="card article-card">
+          <img src="your-path/healthy-diet.jpg" class="card-img-top" alt="Healthy Diet">
+          <div class="card-body">
+            <span class="badge badge-readtime bg-lightgreen">10 minute read</span>
+            <h5 class="card-title">Top Foods for a Healthy Diet</h5>
+            <p class="card-text">Discover the superfoods that can boost your health and vitality.</p>
+          </div>
         </div>
-        <br><br>
-        <div style="text-align: center;">
-            <h3>Importance of Health</h3><br>
-            <p>Drawing on centuries of wisdom, Ayurveda doesn't just treat symptoms; it aims to identify and address the root cause of an imbalance, diving deeper into understanding the unique constitution (prakriti) of each individual. The science behind Ayurveda is rooted in natural principles, treating the body as a whole system and understanding how it interacts with its environment.</p>
+      </div>
+
+      <!-- Article Card 2 -->
+      <div class="col-md-4 mb-4">
+        <div class="card article-card">
+          <img src="your-path/meditation.jpg" class="card-img-top" alt="Meditation">
+          <div class="card-body">
+            <span class="badge badge-readtime bg-lightgreen">5 minute read</span>
+            <h5 class="card-title">The Benefits of Meditation</h5>
+            <p class="card-text">Learn how mindfulness can enhance your mental well-being and reduce stress.</p>
+          </div>
         </div>
-    </section>
+      </div>
+
+      <!-- Article Card 3 -->
+      <div class="col-md-4 mb-4">
+        <div class="card article-card">
+          <img src="your-path/home-workout.jpg" class="card-img-top" alt="Home Workout">
+          <div class="card-body">
+            <span class="badge badge-readtime bg-lightgreen">7 minute read</span>
+            <h5 class="card-title">Effective Home Workouts</h5>
+            <p class="card-text">Stay fit with these simple yet effective home workout routines.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View More Button -->
+    <div class="mt-3">
+      <button class="btn btn-dark rounded-pill px-4 py-2 fw-bold">
+        View more <i class="fas fa-arrow-right ms-2"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+    
 
     <!-- Articles Section -->
     <section id="articles" class="container py-5">

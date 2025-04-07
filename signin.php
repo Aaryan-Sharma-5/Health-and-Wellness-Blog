@@ -1,3 +1,59 @@
+<?php
+require 'db.php';
+session_start();
+
+// Check if the user is already logged in
+if (isset($_SESSION['user_id'])) {
+  header("Location: index.php");
+  exit();
+}
+
+if (isset($_POST['submit'])) {
+  // getting input
+  $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $password = filter_var(($_POST['password']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  if (!$email) {
+    $_SESSION['signin'] = 'Email is Incorrect';
+  } elseif (!$password) {
+    $_SESSION['signin'] = 'Password required';
+  } else {
+    // fetch user from database
+    $stmt = $connection->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+      // Convert the record into an associative array
+      $user_record = $result->fetch_assoc();
+      $db_password = $user_record['password'];
+
+      // Compare form password with database password
+      if (password_verify($password, $db_password)) {
+        // Set session for access control
+        $_SESSION['user-id'] = $user_record['user_id'];
+        $_SESSION['signin-success'] = "User successfully logged in";
+
+        // Set session if user is admin
+        if ($user_record['is_admin'] == 1) {
+          $_SESSION['user_is_admin'] = true;
+        }
+
+        // Log in user
+        header('location: index.php');
+        exit();
+      } else {
+        $_SESSION['signin'] = "Invalid password. Please try again.";
+      }
+    } else {
+      $_SESSION['signin'] = "User not found. Please check your input.";
+    }
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +88,7 @@
 
     /* Left Side - Dark */
     .left-side {
-      background-color:rgb(0, 0, 0);
+      background-color: rgb(0, 0, 0);
       color: white;
       width: 60%;
       padding: 60px;
@@ -84,7 +140,7 @@
       cursor: pointer;
       color: white;
     }
-    
+
     .forgot-password {
       position: absolute;
       right: 0;
@@ -186,6 +242,26 @@
       color: white;
     }
 
+    .alert__message {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .alert__message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .alert__message.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .container {
@@ -208,26 +284,29 @@
     <div class="left-side">
       <h1>Sign in to your account</h1>
 
-      <form>
+      <?php if (isset($_SESSION['signin'])): ?>
+        <div class="alert__message error">
+          <p><?= $_SESSION['signin'];
+              unset($_SESSION['signin']); ?></p>
+        </div>
+      <?php endif; ?>
+
+      <form action="signin.php" method="POST">
         <div class="form-group">
-        <span class="icon">✉️</span>
-          <input type="email" placeholder="Email" required>
+          <span class="icon">✉️</span>
+          <input type="email" name="email" placeholder="Email" required>
         </div>
 
         <div class="form-group">
           <span class="icon">🔒</span>
-          <input type="password" id="password" placeholder="Password" required>
+          <input type="password" name="password" id="password" placeholder="Password" required>
           <span class="eye-icon" onclick="togglePassword()">👁️</span>
-          <a href="#" class="forgot-password">forgot password?</a>
+          <small><a href="#" class="forgot-password">forgot password?</a></small>
         </div>
 
         <br>
-        <div class="checkbox-container">
-          <input type="checkbox" id="terms">
-          <label for="terms">I agree with the terms and conditions and privacy policy</label>
-        </div>
 
-        <button type="submit" class="btn-sign-in">Sign In</button>
+        <button type="submit" name="submit" class="btn-sign-in">Sign In</button>
       </form>
     </div>
 
@@ -243,8 +322,8 @@
 
       <!-- Sign Up Section -->
       <div>
-        <p class="signup-text" style="margin-bottom: 10px;">Don't have an account? <a href="#" class="signup-link">Sign Up!</a></p>
-        <button class="btn-signup">Sign Up</button>
+        <p class="signup-text" style="margin-bottom: 10px;">Don't have an account? <a href="signup.php" class="signup-link">Sign Up!</a></p>
+        <button class="btn-signup"><a href="signup.php" style="text-decoration:none; color:#FFFFFF">Sign Up</a></button>
       </div>
     </div>
   </div>
@@ -256,7 +335,7 @@
 
       if (passwordField.type === 'password') {
         passwordField.type = 'text';
-        eyeIcon.textContent = '👁️';
+        eyeIcon.textContent = '🙈';
       } else {
         passwordField.type = 'password';
         eyeIcon.textContent = '👁️';

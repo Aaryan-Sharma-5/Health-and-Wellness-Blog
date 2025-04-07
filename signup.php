@@ -1,3 +1,80 @@
+<?php
+
+require "db.php";
+session_start();
+
+//get signup form data
+if (isset($_POST["submit"])) {
+  $username = filter_var($_POST['username'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+  $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $confirmpassword = filter_var($_POST['confirmpassword'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+  // validate form data
+  if (!$username) {
+    $_SESSION['signup'] = 'Please enter your Username';
+  } elseif (!$email) {
+    $_SESSION['signup'] = 'Please enter your Email';
+  } elseif (strlen($password) < 8 || strlen($confirmpassword) < 8) {
+    $_SESSION['signup'] = 'Password should be 8+ characters';
+  } elseif ($password !== $confirmpassword) {
+    $_SESSION['signup'] = "Passwords do not match";
+  } else {
+    // Check if username or email already exists
+    $stmt = $connection->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
+    $stmt->bind_param("ss", $username, $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+      $_SESSION['signup'] = "Username or Email already exists";
+    } else {
+      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+      // Insert new user into the database
+      $stmt = $connection->prepare("INSERT INTO users (username, email, password, is_admin) VALUES (?, ?, ?, 0)");
+      $stmt->bind_param("sss", $username, $email, $hashed_password);
+      $stmt->execute();
+
+      if ($stmt->affected_rows > 0) {
+        $_SESSION['signup-success'] = "Registration successful! Please log in.";
+        header('location: signin.php');
+        exit();
+      } else {
+        $_SESSION['signup'] = "Something went wrong. Please try again.";
+      }
+    }
+  }
+
+  if (isset($_SESSION['signup'])) {
+    $_SESSION['signup-data'] = $_POST;
+    header('location: signup.php');
+    die();
+  }
+}
+
+if (isset($_SESSION['message'])) {
+  $message = $_SESSION['message'];
+  unset($_SESSION['message']);
+} else {
+  $message = null;
+}
+
+if (isset($_SESSION['error'])) {
+  $error = $_SESSION['error'];
+  unset($_SESSION['error']);
+} else {
+  $error = null;
+}
+
+if (isset($_SESSION['signup-data'])) {
+  unset($_SESSION['signup-data']);
+}
+
+$connection->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,6 +157,11 @@
       cursor: pointer;
       font-size: 1rem;
       margin-top: 15px;
+    }
+
+    .btn-signin a {
+      text-decoration: none;
+      color: #ffffff;
     }
 
     /* Right Side - Sign Up Form */
@@ -219,6 +301,26 @@
         padding: 40px 20px;
       }
     }
+
+    .alert__message {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .alert__message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .alert__message.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
   </style>
 </head>
 
@@ -226,62 +328,58 @@
   <div class="container">
     <!-- Left Side - Welcome Back -->
     <div class="left-side">
-    <h1>Welcome Back!</h1>
+      <h1>Welcome Back!</h1>
       <p style="margin-bottom: 20px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 
       <!-- Logo Section -->
       <div>
         <img src="logo.png" alt="Company Logo" style="max-width: 80px; height: auto;">
       </div>
-      <div> 
-        <p class="signin-text" style="margin-bottom: 10px;">Already have an account? Sign in!</p>
-        <button class="btn-signin">Sign in</button>
+      <div>
+        <p class="signin-text" style="margin-bottom: 10px;">Already have an account? </p>
+        <button class="btn-signin"><a href="signin.php"> Sign in</button></a>
       </div>
     </div>
 
     <!-- Right Side - Sign Up Form -->
     <div class="right-side">
+      <?php
+      if (isset($_SESSION['signup'])): ?>
+        <div class="alert__message error">
+          <p>
+            <?= $_SESSION['signup'];
+            unset($_SESSION['signup']);
+            ?>
+          </p>
+        </div>
+      <?php endif ?>
+
       <h1>Sign Up to your account</h1>
 
-      <div class="select-container">
-        <select class="select-box">
-          <option selected disabled>Select Role</option>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-          <option value="editor">Editor</option>
-        </select>
-      </div>
-
       <div class="form-container">
-        <form>
+        <form action="signup.php" enctype="multipart/form-data" method="POST">
           <div class="form-group">
             <span class="icon">👤</span>
-            <input type="text" placeholder="Username" required>
+            <input type="text" name="username" value="<?= htmlspecialchars($_SESSION['signup-data']['username'] ?? '') ?>" placeholder="Username" required>
           </div>
 
           <div class="form-group">
             <span class="icon">✉️</span>
-            <input type="email" placeholder="Email" required>
+            <input type="email" name="email" value="<?= htmlspecialchars($_SESSION['signup-data']['email'] ?? '') ?>" placeholder="Email" required>
           </div>
 
           <div class="form-group">
             <span class="icon">🔒</span>
-            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="password" name="password" value="<?= htmlspecialchars($password ?? '') ?>" placeholder="Password" required>
             <span class="eye-icon" onclick="togglePassword()">👁️</span>
           </div>
 
           <div class="form-group">
             <span class="icon">🔒</span>
-            <input type="password" id="cpassword" placeholder="Confirm Password" required>
-          </div>
-          <small class="forgot-password">forgot password?</small>
-
-          <div class="checkbox-container">
-            <input type="checkbox" id="terms">
-            <label for="terms">I agree with the terms and conditions and privacy policy</label>
+            <input type="password" id="cpassword" name="confirmpassword" value="<?= htmlspecialchars($confirmpassword ?? '') ?>" placeholder="Confirm Password" required>
           </div>
 
-          <button type="submit" class="btn-sign-up">Sign Up</button>
+          <button type="submit" name="submit" class="btn-sign-up">Sign Up</button>
         </form>
       </div>
     </div>
@@ -294,8 +392,10 @@
 
       if (passwordField.type === 'password') {
         passwordField.type = 'text';
+        eyeIcon.textContent = '🙈';
       } else {
         passwordField.type = 'password';
+        eyeIcon.textContent = '👁️';
       }
     }
   </script>

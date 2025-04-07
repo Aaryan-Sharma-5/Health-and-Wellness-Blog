@@ -15,7 +15,7 @@ echo '
   .navbar {
     background-color: white;
     border-bottom: 1px solid #d1d5db;
-    font-family: sans-serif;
+    font-family: Arial, sans-serif;
   }
 
   .navbar-container {

@@ -362,7 +362,7 @@
   }
 </style>
 
-<div class="footer-5-column" >
+<div class="footer-5-column">
   <div class="footer-container">
     <div class="footer-navbar-container" style="margin-top: 0.1rem; padding-top: 0.1rem;">
       <div class="footer-company-details">
@@ -414,16 +414,6 @@
             </li>
           </ul>
         </div>
-      </div>
-
-      <!-- Newsletter Section -->
-      <div class="footer-navbar-col">
-        <h3>Subscribe to Our Newsletter</h3>
-        <p>Get the latest updates, tips, and wellness<br>insights delivered to your inbox.</p>
-        <form action="subscribe.php" method="POST" class="newsletter-form">
-          <input type="email" name="email" placeholder="Enter your email" required class="newsletter-input" />
-          <button type="submit" class="newsletter-btn">Subscribe</button>
-        </form>
       </div>
 
       <div class="footer-navbar" style="padding-left: 4rem;">
