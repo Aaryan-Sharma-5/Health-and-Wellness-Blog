@@ -33,6 +33,7 @@ if (isset($_POST['submit'])) {
       if (password_verify($password, $db_password)) {
         // Set session for access control
         $_SESSION['user-id'] = $user_record['user_id'];
+        $_SESSION['username'] = $user_record['username'];
         $_SESSION['signin-success'] = "User successfully logged in";
 
         // Set session if user is admin

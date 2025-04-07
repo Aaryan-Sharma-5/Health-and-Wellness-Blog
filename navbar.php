@@ -150,6 +150,49 @@ session_start();
       border-radius: 0.25rem;
     }
 
+    .nav__profile {
+      position: relative;
+    }
+
+    .nav__profile:hover .dropdown-menu {
+      display: block;
+    }
+
+    .nav__profile:hover .user-btn {
+      background-color: #f3f4f6;
+    }
+
+    .nav__profile:hover .user-btn i {
+      color: #2563eb;
+    }
+
+    .alert {
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 80%;
+      border-radius: 5px;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 80%;
+      border-radius: 5px;
+      font-size: 1rem;
+      text-align: center;
+    }
+
     /* Responsive */
     @media (min-width: 768px) {
       .menu-toggle {
@@ -180,6 +223,19 @@ session_start();
 </head>
 
 <body>
+  <?php if (isset($_SESSION['signin-success'])) : ?>
+    <div class="alert alert-success">
+      <?= htmlspecialchars($_SESSION['signin-success']); ?>
+    </div>
+    <?php unset($_SESSION['signin-success']); ?>
+  <?php endif; ?>
+  <?php if (isset($_SESSION['signin-error'])) : ?>
+    <div class="alert alert-error">
+      <?= htmlspecialchars($_SESSION['signin-error']); ?>
+    </div>
+    <?php unset($_SESSION['signin-error']); ?>
+  <?php endif; ?>
+
   <nav>
     <div class="container navbar-container">
       <a href="index.php" class="logo-link">
@@ -199,7 +255,7 @@ session_start();
 
             <ul class="dropdown-menu" id="user-dropdown">
               <div class="dropdown-header">
-                <span class="user-name"><?= $_SESSION['username'] ?></span>
+                <span class="user-name"><?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest' ?></span>
               </div>
               <li><a href="index.php">Dashboard</a></li>
               <li><a href="logout.php">Logout</a></li>
