@@ -115,7 +115,7 @@ include 'navbar.php'
 
     <h2>📬 Let's Stay Connected</h2>
     <p>Have questions, feedback, or just want to say hi? <br>
-      <a href="contact.html">Head over to our Contact Page</a> or connect with us on social media!
+      <a href="contact.php">Head over to our Contact Page</a> or connect with us on social media!
     </p>
 
     <p>Let's grow, glow, and thrive — together. <span class="emoji">🌱</span></p>
