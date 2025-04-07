@@ -34,6 +34,12 @@ session_start();
       justify-content: space-between;
     }
 
+    .navbar-divider {
+      height: 1px;
+      background-color: #d1d5db;
+      margin: 0;
+    }
+
     .logo-link {
       display: flex;
       align-items: center;
@@ -237,7 +243,7 @@ session_start();
   <?php endif; ?>
 
   <nav>
-    <div class="container navbar-container">
+    <div class="navbar-container">
       <a href="index.php" class="logo-link">
         <img src="logo.png" class="logo-img" alt="Logo">
         <span class="logo-text">Health & Wellness</span>
@@ -266,6 +272,7 @@ session_start();
         <?php endif ?>
       </ul>
   </nav>
+  <div class="navbar-divider"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
