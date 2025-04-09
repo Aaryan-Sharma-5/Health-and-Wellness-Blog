@@ -37,7 +37,6 @@ include 'db.php';
         .card:hover {
             transform: scale(1.05);
         }
-
         textarea {
             resize: none;
         }
@@ -52,60 +51,60 @@ include 'db.php';
 
     <!-- Hero Section -->
     <section class="articles-section">
-  <div class="container text-center">
-    <h2 class="section-title">Explore Trending Wellness Articles</h2>
-    <p class="section-subtitle">Discover the latest insights in health and wellness.</p>
+        <div class="container text-center">
+            <h2 class="section-title">Explore Trending Wellness Articles</h2>
+            <p class="section-subtitle">Discover the latest insights in health and wellness.</p>
 
-    <div class="row justify-content-center mt-4">
-      <!-- Article Card 1 -->
-      <div class="col-md-4 mb-4">
-        <div class="card article-card">
-          <img src="your-path/healthy-diet.jpg" class="card-img-top" alt="Healthy Diet">
-          <div class="card-body">
-            <span class="badge badge-readtime bg-lightgreen">10 minute read</span>
-            <h5 class="card-title">Top Foods for a Healthy Diet</h5>
-            <p class="card-text">Discover the superfoods that can boost your health and vitality.</p>
-          </div>
+            <div class="row justify-content-center mt-4">
+                <!-- Article Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card article-card">
+                        <img src="Images/Categories/Category_2.jpg" class="card-img-top" alt="Healthy Diet">
+                        <div class="card-body">
+                            <span class="badge badge-readtime bg-lightgreen">10 minute read</span>
+                            <h5 class="card-title">Top Foods for a Healthy Diet</h5>
+                            <p class="card-text">Discover the super foods that can boost your health and vitality.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card article-card">
+                        <img src="Images/Categories/Category_8.png" class="card-img-top img-fluid" alt="Meditation">
+                        <div class="card-body">
+                            <span class="badge badge-readtime bg-lightgreen">5 minute read</span>
+                            <h5 class="card-title">The Benefits of Meditation</h5>
+                            <p class="card-text">Learn how mindfulness can enhance your mental well-being and reduce stress.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article Card 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card article-card">
+                        <img src="Images/Categories/Category_3.jpg" class="card-img-top" alt="Home Workout">
+                        <div class="card-body">
+                            <span class="badge badge-readtime bg-lightgreen">7 minute read</span>
+                            <h5 class="card-title">Effective Home Workouts</h5>
+                            <p class="card-text">Stay fit with these simple yet effective home workout routines.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View More Button -->
+            <div class="mt-3">
+                <button class="btn btn-dark rounded-pill px-4 py-2 fw-bold">
+                    <a href="#categories.php" style="text-decoration: none; color: #FFFFFF">View more <i class="fas fa-arrow-right ms-2"></i></a>
+                </button>
+            </div>
         </div>
-      </div>
-
-      <!-- Article Card 2 -->
-      <div class="col-md-4 mb-4">
-        <div class="card article-card">
-          <img src="your-path/meditation.jpg" class="card-img-top" alt="Meditation">
-          <div class="card-body">
-            <span class="badge badge-readtime bg-lightgreen">5 minute read</span>
-            <h5 class="card-title">The Benefits of Meditation</h5>
-            <p class="card-text">Learn how mindfulness can enhance your mental well-being and reduce stress.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Article Card 3 -->
-      <div class="col-md-4 mb-4">
-        <div class="card article-card">
-          <img src="your-path/home-workout.jpg" class="card-img-top" alt="Home Workout">
-          <div class="card-body">
-            <span class="badge badge-readtime bg-lightgreen">7 minute read</span>
-            <h5 class="card-title">Effective Home Workouts</h5>
-            <p class="card-text">Stay fit with these simple yet effective home workout routines.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- View More Button -->
-    <div class="mt-3">
-      <button class="btn btn-dark rounded-pill px-4 py-2 fw-bold">
-        View more <i class="fas fa-arrow-right ms-2"></i>
-      </button>
-    </div>
-  </div>
-</section>
+    </section>
 
 
 
-    
+
 
     <!-- Articles Section -->
     <section id="articles" class="container py-5">
@@ -113,7 +112,7 @@ include 'db.php';
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    <img src="article1.jpeg" class="card-img-top" alt="Healthy Eating">
+                    <img src="Images/Landing_Page/Landing_page_article_1.png" class="card-img-top" alt="Healthy Eating">
                     <div class="card-body">
                         <h5 class="card-title">Healthy Eating Habits</h5>
                         <p class="card-text">Learn how to maintain a balanced diet for better health.</p>
@@ -123,7 +122,7 @@ include 'db.php';
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="article2.jpeg" class="card-img-top" alt="Workout Tips">
+                    <img src="Images/Landing_Page/Landing_page_article_2.jpg" class="card-img-top" alt="Workout Tips">
                     <div class="card-body">
                         <h5 class="card-title">Best Fitness Routines</h5>
                         <p class="card-text">Discover the best workout routines to stay fit.</p>
@@ -133,7 +132,7 @@ include 'db.php';
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="article3.jpeg" class="card-img-top" alt="Mental Health">
+                    <img src="Images/Landing_Page/Landing_page_article_3.png" class="card-img-top" alt="Mental Health">
                     <div class="card-body">
                         <h5 class="card-title">Mental Wellness</h5>
                         <p class="card-text">Find out how to manage stress effectively.</p>
