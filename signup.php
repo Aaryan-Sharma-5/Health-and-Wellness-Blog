@@ -74,7 +74,6 @@ if (isset($_SESSION['signup-data'])) {
 $connection->close();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -259,23 +258,6 @@ $connection->close();
       display: block;
     }
 
-    .checkbox-container {
-      display: flex;
-      align-items: flex-start;
-      margin: 20px 0 30px;
-    }
-
-    .checkbox-container input {
-      margin-right: 10px;
-      margin-top: 3px;
-    }
-
-    .checkbox-container label {
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.8);
-      line-height: 1.3;
-    }
-
     .btn-sign-up {
       background-color: #000;
       color: white;
@@ -300,6 +282,20 @@ $connection->close();
         width: 100%;
         padding: 40px 20px;
       }
+    }
+
+    .alert {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
     }
 
     .alert__message {

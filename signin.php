@@ -2,6 +2,13 @@
 require 'db.php';
 session_start();
 
+if (isset($_SESSION['signup-success'])) {
+  $signupSuccess = $_SESSION['signup-success'];
+  unset($_SESSION['signup-success']);
+} else {
+  $signupSuccess = null;
+}
+
 // Check if the user is already logged in
 if (isset($_SESSION['user_id'])) {
   header("Location: index.php");
@@ -52,7 +59,6 @@ if (isset($_POST['submit'])) {
     }
   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -149,21 +155,6 @@ if (isset($_POST['submit'])) {
       font-size: 0.75rem;
       color: rgba(255, 255, 255, 0.7);
       text-decoration: none;
-    }
-
-    .checkbox-container {
-      display: flex;
-      align-items: center;
-      margin: 20px 0 30px;
-    }
-
-    .checkbox-container input {
-      margin-right: 10px;
-    }
-
-    .checkbox-container label {
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.8);
     }
 
     .btn-sign-in {
@@ -263,6 +254,50 @@ if (isset($_POST['submit'])) {
       border: 1px solid #c3e6cb;
     }
 
+    .alert {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    #top-alert {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      padding: 15px 25px;
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: fadeOut 5s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        display: none;
+      }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .container {
@@ -280,9 +315,16 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
+  <?php if ($signupSuccess): ?>
+    <div id="top-alert" class="alert alert-success">
+      <?= htmlspecialchars($signupSuccess); ?>
+    </div>
+  <?php endif; ?>
+
   <div class="container" style="border-radius: 20px; overflow: hidden;">
     <!-- Left Side - Sign In Form -->
     <div class="left-side">
+
       <h1>Sign in to your account</h1>
 
       <?php if (isset($_SESSION['signin'])): ?>
@@ -342,6 +384,13 @@ if (isset($_POST['submit'])) {
         eyeIcon.textContent = '👁️';
       }
     }
+
+    setTimeout(() => {
+      const alert = document.getElementById('top-alert');
+      if (alert) {
+        alert.remove();
+      }
+    }, 5000);
   </script>
 </body>
 
