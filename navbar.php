@@ -247,7 +247,7 @@ if (session_status() == PHP_SESSION_NONE) {
   <nav>
     <div class="navbar-container">
       <a href="index.php" class="logo-link">
-        <img src="logo.png" class="logo-img" alt="Logo">
+        <img src="Images/logo.png" class="logo-img" alt="Logo">
         <span class="logo-text">Health & Wellness</span>
       </a>
       <ul class="nav-list">
@@ -279,7 +279,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Dropdown menu toggle
       const userButton = document.getElementById('user-menu-button');
       const dropdownMenu = document.getElementById('user-dropdown');
 
@@ -294,7 +293,6 @@ if (session_status() == PHP_SESSION_NONE) {
         });
       }
 
-      // Responsive navigation toggle
       const openNavBtn = document.getElementById('open__nav-btn');
       const closeNavBtn = document.getElementById('close__nav-btn');
       const navContainer = document.querySelector('.navbar-container');

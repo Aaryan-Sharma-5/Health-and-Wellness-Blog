@@ -9,14 +9,12 @@ if (isset($_SESSION['signup-success'])) {
   $signupSuccess = null;
 }
 
-// Check if the user is already logged in
 if (isset($_SESSION['user_id'])) {
   header("Location: index.php");
   exit();
 }
 
 if (isset($_POST['submit'])) {
-  // getting input
   $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $password = filter_var(($_POST['password']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
@@ -25,30 +23,25 @@ if (isset($_POST['submit'])) {
   } elseif (!$password) {
     $_SESSION['signin'] = 'Password required';
   } else {
-    // fetch user from database
     $stmt = $connection->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows === 1) {
-      // Convert the record into an associative array
       $user_record = $result->fetch_assoc();
       $db_password = $user_record['password'];
 
-      // Compare form password with database password
       if (password_verify($password, $db_password)) {
         // Set session for access control
         $_SESSION['user-id'] = $user_record['user_id'];
         $_SESSION['username'] = $user_record['username'];
         $_SESSION['signin-success'] = "User successfully logged in";
 
-        // Set session if user is admin
         if ($user_record['is_admin'] == 1) {
           $_SESSION['user_is_admin'] = true;
         }
 
-        // Log in user
         header('location: index.php');
         exit();
       } else {
@@ -93,7 +86,6 @@ if (isset($_POST['submit'])) {
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* Left Side - Dark */
     .left-side {
       background-color: rgb(0, 0, 0);
       color: white;
@@ -174,7 +166,6 @@ if (isset($_POST['submit'])) {
       background-color: #111;
     }
 
-    /* Right Side - Light */
     .right-side {
       background-color: #e0e0e0;
       width: 60%;
@@ -221,7 +212,6 @@ if (isset($_POST['submit'])) {
       margin-top: 15px;
     }
 
-    /* Form icons */
     .icon {
       position: absolute;
       left: 0;
@@ -298,7 +288,6 @@ if (isset($_POST['submit'])) {
       }
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
@@ -322,11 +311,9 @@ if (isset($_POST['submit'])) {
   <?php endif; ?>
 
   <div class="container" style="border-radius: 20px; overflow: hidden;">
-    <!-- Left Side - Sign In Form -->
     <div class="left-side">
 
       <h1>Sign in to your account</h1>
-
       <?php if (isset($_SESSION['signin'])): ?>
         <div class="alert__message error">
           <p><?= $_SESSION['signin'];
@@ -346,24 +333,19 @@ if (isset($_POST['submit'])) {
           <span class="eye-icon" onclick="togglePassword()">👁️</span>
           <small><a href="#" class="forgot-password">forgot password?</a></small>
         </div>
-
         <br>
-
         <button type="submit" name="submit" class="btn-sign-in">Sign In</button>
       </form>
     </div>
 
-    <!-- Right Side - Welcome Section -->
     <div class="right-side">
-      <h1>Welcome Back!</h1>
-      <p style="margin-bottom: 20px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+      <h1>Welcome Back to H&W!</h1>
+      <p style="margin-bottom: 20px;">Glad to see you again! Sign in to continue your journey toward better health and well-being with the latest tips, guides, and exclusive content.</p>
 
-      <!-- Logo Section -->
       <div>
-        <img src="logo.png" alt="Company Logo" style="max-width: 80px; height: auto;">
+        <img src="Images/logo.png" alt="Company Logo" style="max-width: 80px; height: auto;">
       </div>
 
-      <!-- Sign Up Section -->
       <div>
         <p class="signup-text" style="margin-bottom: 10px;">Don't have an account? <a href="signup.php" class="signup-link">Sign Up!</a></p>
         <button class="btn-signup"><a href="signup.php" style="text-decoration:none; color:#FFFFFF">Sign Up</a></button>

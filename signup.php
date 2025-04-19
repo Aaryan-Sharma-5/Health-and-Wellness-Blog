@@ -117,8 +117,8 @@ $connection->close();
       justify-content: center;
       align-items: center;
       text-align: center;
-      background-color: #f2f2f2;
-      background-image: linear-gradient(rgba(242, 242, 242, 0.8), rgba(242, 242, 242, 0.8)), url('texture.jpg');
+      background-color: #e6e6e6; /* Updated to match image */
+      background-image: none;
       background-size: cover;
     }
 
@@ -165,18 +165,20 @@ $connection->close();
 
     /* Right Side - Sign Up Form */
     .right-side {
-      background-color: #ffffff;
+      background-color: #000000; /* Updated to match image */
       width: 50%;
       padding: 40px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      color: white; /* Added for text visibility */
     }
 
     .right-side h1 {
       font-size: 2.2rem;
       margin-bottom: 40px;
       text-align: center;
+      color: #ffffff; /* Updated to match image */
     }
 
     .select-container {
@@ -199,7 +201,7 @@ $connection->close();
     }
 
     .form-container {
-      background-color: #707070;
+      background-color: #000000; /* Updated to match image */
       border-radius: 10px;
       padding: 30px;
       margin-top: 20px;
@@ -259,9 +261,9 @@ $connection->close();
     }
 
     .btn-sign-up {
-      background-color: #000;
+      background-color: transparent; /* Updated to match image */
       color: white;
-      border: none;
+      border: 1px solid white; /* Updated to match image */
       border-radius: 25px;
       padding: 12px;
       width: 100%;
@@ -324,12 +326,12 @@ $connection->close();
   <div class="container">
     <!-- Left Side - Welcome Back -->
     <div class="left-side">
-      <h1>Welcome Back!</h1>
-      <p style="margin-bottom: 20px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+      <h1>Join the H&W Community!</h1>
+      <p style="margin-bottom: 20px;">Unlock a world of trusted health tips, wellness guides, and inspiring stories. Create your free account today and take the first step toward a healthier, happier you!</p>
 
       <!-- Logo Section -->
       <div>
-        <img src="logo.png" alt="Company Logo" style="max-width: 80px; height: auto;">
+        <img src="Images/logo.png" alt="Company Logo" style="max-width: 80px; height: auto;">
       </div>
       <div>
         <p class="signin-text" style="margin-bottom: 10px;">Already have an account? </p>
