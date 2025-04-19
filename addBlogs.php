@@ -327,14 +327,17 @@ if (empty($categories)) {
             <div class="form-group">
                 <label for="category_id">Category*</label>
                 <select id="category_id" name="category_id" required>
-                    <option value="" <?php if (empty($category_id)) echo "selected"; ?>>Select a category</option>
-                    <?php foreach ($categories as $category): ?>
-                        <option value="<?php echo $category['category_id']; ?>" <?php if ($category_id == $category['category_id']) echo "selected"; ?>>
-                            <?php echo $category['category_name']; ?>
-                        </option>
-                    <?php endforeach; ?>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="1">Mental Health</option>
+                    <option value="2">Food Habits</option>
+                    <option value="3">Gym and Fitness</option>
+                    <option value="4">Sleeping Habits</option>
+                    <option value="5">Longevity</option>
+                    <option value="6">Sexual Health</option>
+                    <option value="7">Parenting</option>
+                    <option value="8">Spiritual Health</option>
+                    <option value="9">Disease Management</option>
                 </select>
-                <span class="error"><?php echo $categoryErr; ?></span>
             </div>
             
             <div class="form-group">

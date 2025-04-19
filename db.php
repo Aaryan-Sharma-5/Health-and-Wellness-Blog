@@ -62,5 +62,4 @@ $sql = "CREATE TABLE IF NOT EXISTS article_likes (
     FOREIGN KEY (article_id) REFERENCES articles(article_id) ON DELETE CASCADE
 );";
 $connection->query($sql);
-
 ?>

@@ -118,74 +118,92 @@
     <div class="categories-grid">
       <!-- Category Card 1 -->
       <div class="category-card">
-        <img src="Images\Categories\Category_1.jpg" alt="Mental Health">
-        <div class="overlay">
-          <h3>Mental Health</h3>
-        </div>
+        <a href="blogs.php?category=1">
+          <img src="Images\Categories\Category_1.jpg" alt="Mental Health">
+          <div class="overlay">
+            <h3>Mental Health</h3>
+          </div>
+        </a>
       </div>
 
       <!-- Category Card 2 -->
       <div class="category-card">
-        <img src="Images\Categories\Category_2.jpg" alt="Food Habits">
-        <div class="overlay">
-          <h3>Food Habits</h3>
-        </div>
+        <a href="blogs.php?category=2">
+          <img src="Images\Categories\Category_2.jpg" alt="Food Habits">
+          <div class="overlay">
+            <h3>Food Habits</h3>
+          </div>
+        </a>
       </div>
 
       <!-- Category Card 3 -->
       <div class="category-card">
-        <img src="Images\Categories\Category_3.jpg" alt="Gym and Fitness">
-        <div class="overlay">
-          <h3>Gym and Fitness</h3>
-        </div>
+        <a href="blogs.php?category=3">
+          <img src="Images\Categories\Category_3.jpg" alt="Gym and Fitness">
+          <div class="overlay">
+            <h3>Gym and Fitness</h3>
+          </div>
+        </a>
       </div>
 
       <!-- Category Card 4 -->
       <div class="category-card">
-        <img src="Images\Categories\Category_4.jpg" alt="Sleeping Habits">
-        <div class="overlay">
-          <h3>Sleeping Habits</h3>
-        </div>
+        <a href="blogs.php?category=4">
+          <img src="Images\Categories\Category_4.jpg" alt="Sleeping Habits">
+          <div class="overlay">
+            <h3>Sleeping Habits</h3>
+          </div>
+        </a>
       </div>
 
       <!-- Category Card 5 -->
       <div class="category-card">
-        <img src="Images\Categories\Category_5.png" alt="Longevity">
-        <div class="overlay">
-          <h3>Longevity</h3>
-        </div>
+        <a href="blogs.php?category=5">
+          <img src="Images\Categories\Category_5.png" alt="Longevity">
+          <div class="overlay">
+            <h3>Longevity</h3>
+          </div>
+        </a>
       </div>
 
       <!-- Category Card 6 -->
       <div class="category-card">
-        <img src="Images\Categories\Category_6.png" alt="Sexual Health">
-        <div class="overlay">
-          <h3>Sexual Health</h3>
-        </div>
+        <a href="blogs.php?category=6">
+          <img src="Images\Categories\Category_6.png" alt="Sexual Health">
+          <div class="overlay">
+            <h3>Sexual Health</h3>
+          </div>
+        </a>
       </div>
 
       <!-- Category Card 7 -->
       <div class="category-card">
-        <img src="Images\Categories\Category_7.png" alt="Parenting">
-        <div class="overlay">
-          <h3>Parenting</h3>
-        </div>
+        <a href="blogs.php?category=7">
+          <img src="Images\Categories\Category_7.png" alt="Parenting">
+          <div class="overlay">
+            <h3>Parenting</h3>
+          </div>
+        </a>
       </div>
 
       <!-- Category Card 8 -->
       <div class="category-card">
-        <img src="Images\Categories\Category_8.png" alt="Spiritual Health">
-        <div class="overlay">
-          <h3>Spiritual Health</h3>
-        </div>
+        <a href="blogs.php?category=8">
+          <img src="Images\Categories\Category_8.png" alt="Spiritual Health">
+          <div class="overlay">
+            <h3>Spiritual Health</h3>
+          </div>
+        </a>
       </div>
 
       <!-- Category Card 9 -->
       <div class="category-card">
-        <img src="Images\Categories\Category_9.jpg" alt="Disease Management">
-        <div class="overlay">
-          <h3>Disease Management</h3>
-        </div>
+        <a href="blogs.php?category=9">
+          <img src="Images\Categories\Category_9.jpg" alt="Disease Management">
+          <div class="overlay">
+            <h3>Disease Management</h3>
+          </div>
+        </a>
       </div>
     </div>
   </div>
