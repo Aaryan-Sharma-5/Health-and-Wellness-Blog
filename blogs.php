@@ -11,9 +11,6 @@ $count_sql = "SELECT COUNT(*) as total FROM articles a WHERE 1=1";
 if ($category) {
     $count_sql .= " AND a.category_id = $category";
 }
-$count_result = $connection->query($count_sql);
-$total_articles = $count_result->fetch_assoc()['total'];
-$total_pages = ceil($total_articles / $articles_per_page);
 
 $sql = "SELECT 
     a.article_id, 
@@ -56,6 +53,10 @@ if ($sort === 'popular') {
 $articles_per_page = 10;
 $current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 $offset = ($current_page - 1) * $articles_per_page;
+
+$count_result = $connection->query($count_sql);
+$total_articles = $count_result->fetch_assoc()['total'];
+$total_pages = ceil($total_articles / $articles_per_page);
 
 $sql .= " LIMIT $offset, $articles_per_page";
 
@@ -151,21 +152,46 @@ function getCategoryName($category_id)
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         body {
-            background-color: #ffffff;
-            color: #000000;
-            line-height: 1.5;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #fff;
             margin: 0;
             padding: 0;
+            line-height: 1.5;
+        }
+
+        /* Navigation styles for dark theme */
+        body.blogs-page .nav-list li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        body.blogs-page .nav-list li a:hover {
+            color: #1f2937;
+            text-decoration: none;
+        }
+
+        body.blogs-page .logo-link .logo-text {
+            color: #fff;
+        }
+
+        body.blogs-page .navbar {
+            background-color: transparent;
+            border-bottom: none;
+        }
+
+        body.blogs-page .navbar-divider {
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
         .main-content {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
         }
 
         .blog-list {
@@ -174,14 +200,18 @@ function getCategoryName($category_id)
 
         .blog-card {
             display: flex;
-            padding: 15px 10px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            background-color: #1a1a1a;
             position: relative;
-            transition: background-color 0.2s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            overflow: hidden;
         }
 
         .blog-card:hover {
-            background-color: #f5f5f5;
+            transform: translateY(-5px);
+            background-color: #222;
         }
 
         .blog-content {
@@ -189,10 +219,10 @@ function getCategoryName($category_id)
         }
 
         .blog-title {
-            font-size: 16px;
+            font-size: 1.5rem;
             font-weight: 500;
-            margin-bottom: 6px;
-            color: #000;
+            margin-bottom: 12px;
+            color: #fff;
         }
 
         .blog-title a {
@@ -201,44 +231,38 @@ function getCategoryName($category_id)
         }
 
         .blog-title a:hover {
-            color: #444;
-            text-decoration: underline;
+            color: #ccc;
         }
 
         .blog-meta {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            color: #555;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #aaa;
         }
 
         .tag {
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
             font-weight: 500;
             color: #fff;
-            background-color: #000;
-            border: 1px solid #000;
+            background-color: #333;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* Remove underline */
         }
 
-        .product {
-            background-color: #1a1a1a;
+        .tag:hover {
+            background-color: #444;
+            text-decoration: none; /* Ensure no underline on hover */
         }
 
-        .case-study {
-            background-color: #2a2a2a;
-        }
-
-        .opinion {
-            background-color: #3a3a3a;
-        }
-
-        .ui-theory {
-            background-color: #4a4a4a;
-        }
+        .product { background-color: #1a1a1a; }
+        .case-study { background-color: #2a2a2a; }
+        .opinion { background-color: #3a3a3a; }
+        .ui-theory { background-color: #4a4a4a; }
 
         .author {
             display: flex;
@@ -246,11 +270,10 @@ function getCategoryName($category_id)
         }
 
         .author img {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            margin-right: 5px;
-            filter: grayscale(100%);
+            margin-right: 8px;
         }
 
         .comments {
@@ -258,30 +281,31 @@ function getCategoryName($category_id)
             align-items: center;
         }
 
-        .comments svg {
-            width: 14px;
-            height: 14px;
-            margin-right: 4px;
+        .comments svg, .like-button svg {
+            width: 18px;
+            height: 18px;
+            margin-right: 6px;
         }
 
         .filter-bar {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ccc;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
         }
 
         .filter-options a {
-            margin-right: 15px;
-            color: #555;
+            margin-right: 20px;
+            color: #aaa;
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s ease;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            padding-bottom: 5px;
         }
 
         .filter-options a.active {
-            color: #000;
+            color: #fff;
             font-weight: 500;
             position: relative;
         }
@@ -289,45 +313,44 @@ function getCategoryName($category_id)
         .filter-options a.active::after {
             content: '';
             position: absolute;
-            bottom: -3px;
+            bottom: -5px;
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: #000;
+            background-color: #fff;
         }
 
         .filter-options a:hover {
-            color: #000;
+            color: #fff;
         }
 
         .edit-link {
-            font-size: 12px;
-            color: #555;
+            font-size: 0.8rem;
+            color: #888;
             text-decoration: none;
             position: absolute;
-            right: 10px;
-            top: 15px;
-            transition: color 0.2s ease;
+            right: 20px;
+            top: 20px;
+            transition: color 0.3s ease;
         }
 
         .edit-link:hover {
-            color: #000;
-            text-decoration: underline;
+            color: #fff;
         }
 
         .time::after {
             content: "•";
-            margin-left: 5px;
-            margin-right: 5px;
-            color: #888;
+            margin-left: 8px;
+            margin-right: 8px;
+            color: #666;
         }
 
         .like-button {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             cursor: pointer;
-            transition: color 0.2s ease;
+            transition: color 0.3s ease;
         }
 
         .like-button:hover {
@@ -339,9 +362,9 @@ function getCategoryName($category_id)
         }
 
         .like-icon {
-            width: 14px;
-            height: 14px;
-            transition: stroke 0.2s ease, fill 0.2s ease;
+            width: 18px;
+            height: 18px;
+            transition: stroke 0.3s ease, fill 0.3s ease;
         }
 
         .like-button .like-icon[fill="currentColor"] {
@@ -351,16 +374,16 @@ function getCategoryName($category_id)
 
         .page-info {
             text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #666;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
         }
 
         .category-indicator {
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            padding: 8px 15px;
-            margin-bottom: 15px;
+            background-color: #222;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -368,59 +391,72 @@ function getCategoryName($category_id)
 
         .category-name {
             font-weight: 500;
+            color: #fff;
         }
 
         .clear-filter {
-            color: #555;
+            color: #888;
             text-decoration: none;
-            font-size: 13px;
-            transition: color 0.2s ease;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
         }
 
         .clear-filter:hover {
-            color: #000;
-            text-decoration: underline;
+            color: #fff;
         }
-
 
         .pagination {
             display: flex;
             justify-content: center;
-            margin-top: 30px;
-            gap: 5px;
+            margin-top: 40px;
+            gap: 8px;
         }
 
         .pagination-item {
-            padding: 8px 12px;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
+            padding: 10px 15px;
+            border: 1px solid #333;
+            border-radius: 6px;
             text-decoration: none;
-            color: #555;
-            transition: all 0.2s ease;
+            color: #aaa;
+            transition: all 0.3s ease;
         }
 
         .pagination-item:hover {
-            background-color: #f5f5f5;
+            background-color: #222;
+            color: #fff;
         }
 
         .pagination-item.active {
-            background-color: #000;
+            background-color: #333;
             color: #fff;
-            border-color: #000;
+            border-color: #444;
         }
 
         .pagination-item.disabled {
             opacity: 0.5;
             pointer-events: none;
         }
+        
+        h2.section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .date-info {
+            font-size: 0.8rem;
+            color: #777;
+        }
     </style>
 </head>
 
-<body>
+<body class="blogs-page">
     <?php include 'navbar.php'; ?>
 
     <div class="main-content">
-        <h2 class="text-center mb-4">Explore our Blogs</h2>
+        <h2 class="section-title">Explore Our Blogs</h2>
 
         <?php if ($category): ?>
             <div class="category-indicator">
@@ -467,12 +503,14 @@ function getCategoryName($category_id)
                                     <?php echo htmlspecialchars($row["username"]); ?>
                                 </span>
                                 <span class="time"><?php echo $time_ago; ?></span>
+                                <span class="date-info">
                                 <?php
                                 echo "Published: " . format_date($row['created_at']);
                                 if (isset($row['updated_at']) && $row['updated_at'] != $row['created_at']) {
                                     echo " (Updated: " . format_date($row['updated_at']) . ")";
                                 }
                                 ?>
+                                </span>
                                 <span class="like-button" data-article-id="<?php echo $row["article_id"]; ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="<?php echo (isset($_SESSION['user_id']) && check_if_liked($row["article_id"], $_SESSION['user_id'])) ? 'currentColor' : 'none'; ?>" stroke="currentColor" stroke-width="2" class="like-icon">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -495,7 +533,7 @@ function getCategoryName($category_id)
             <?php
                 }
             } else {
-                echo '<div class="alert alert-info mt-3">No articles found matching these criteria</div>';
+                echo '<div class="alert alert-dark mt-3">No articles found matching these criteria</div>';
             }
             ?>
         </div>

@@ -64,37 +64,63 @@ while ($row = $categoryResult->fetch_assoc()) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #000000;
-            --primary-hover:rgb(100, 100, 100);
-            --secondary-color:rgb(230, 230, 230);
-            --text-color: #333;
-            --light-text: #6c757d;
-            --border-color: #ddd;
+            --primary-color: #ffffff;
+            --primary-hover: rgba(255, 255, 255, 0.8);
+            --secondary-color: rgba(255, 255, 255, 0.1);
+            --text-color: #fff;
+            --text-muted: #ccc;
+            --light-text: #aaa;
+            --border-color: #333;
             --danger-color: #dc3545;
             --success-color: #28a745;
-            --input-focus:rgb(225, 225, 225);
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --input-bg: #222;
+            --input-focus: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, sans-serif;
         }
         
-        body {
-            background-color: #f5f7fa;
+        body.edit-article-page {
+            background-color: #111;
             color: var(--text-color);
             line-height: 1.6;
+        }
+        
+        /* Navigation styling for this page */
+        body.edit-article-page .nav-list li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        body.edit-article-page .nav-list li a:hover {
+            color: #1f2937;
+            text-decoration: none;
+        }
+
+        body.edit-article-page .logo-link .logo-text {
+            color: #fff;
+        }
+
+        body.edit-article-page .navbar {
+            background-color: transparent;
+            border-bottom: none;
+        }
+
+        body.edit-article-page .navbar-divider {
+            background-color: rgba(255, 255, 255, 0.2);
         }
         
         .container {
             max-width: 900px;
             margin: 2rem auto;
             padding: 2rem;
-            background-color: white;
-            border-radius: 8px;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
             box-shadow: var(--shadow);
         }
         
@@ -107,7 +133,7 @@ while ($row = $categoryResult->fetch_assoc()) {
         }
         
         .error {
-            background-color: #ffebee;
+            background-color: rgba(220, 53, 69, 0.2);
             color: var(--danger-color);
             padding: 1rem;
             border-radius: 4px;
@@ -123,7 +149,7 @@ while ($row = $categoryResult->fetch_assoc()) {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
-            color: #555;
+            color: var(--text-muted);
         }
         
         input[type="text"],
@@ -133,9 +159,10 @@ while ($row = $categoryResult->fetch_assoc()) {
             padding: 0.75rem;
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            background-color: white;
+            background-color: var(--input-bg);
             font-size: 1rem;
             transition: all 0.3s ease;
+            color: var(--text-color);
         }
         
         input[type="text"]:focus,
@@ -143,7 +170,7 @@ while ($row = $categoryResult->fetch_assoc()) {
         textarea:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
             background-color: var(--input-focus);
         }
         
@@ -173,7 +200,7 @@ while ($row = $categoryResult->fetch_assoc()) {
         
         .btn-primary {
             background-color: var(--primary-color);
-            color: white;
+            color: #111;
         }
         
         .btn-primary:hover {
@@ -183,10 +210,11 @@ while ($row = $categoryResult->fetch_assoc()) {
         .btn-secondary {
             background-color: var(--secondary-color);
             color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .btn-secondary:hover {
-            background-color: #e2e6ea;
+            background-color: rgba(255, 255, 255, 0.15);
         }
         
         .btn i {
@@ -215,6 +243,12 @@ while ($row = $categoryResult->fetch_assoc()) {
             padding-right: 2.5rem;
         }
         
+        #wordCount {
+            text-align: right;
+            color: var(--light-text);
+            margin-top: 5px;
+        }
+        
         /* Responsive design */
         @media (max-width: 768px) {
             .container {
@@ -239,7 +273,7 @@ while ($row = $categoryResult->fetch_assoc()) {
             padding: 1rem 1.5rem;
             border-radius: 4px;
             color: white;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             z-index: 1000;
@@ -266,7 +300,7 @@ while ($row = $categoryResult->fetch_assoc()) {
         }
     </style>
 </head>
-<body>
+<body class="edit-article-page">
     <?php include 'navbar.php'; ?>
     
     <div class="container">
@@ -303,9 +337,7 @@ while ($row = $categoryResult->fetch_assoc()) {
                 <label for="content"><i class="fas fa-paragraph"></i> Content</label>
                 <textarea id="content" name="content" rows="10" required 
                           placeholder="Write your article content here..."><?php echo htmlspecialchars($article['content']); ?></textarea>
-                <div id="wordCount" style="text-align: right; color: var(--light-text); margin-top: 5px;">
-                    0 words
-                </div>
+                <div id="wordCount">0 words</div>
             </div>
             
             <div class="form-actions">

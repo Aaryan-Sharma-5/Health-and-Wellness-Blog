@@ -1,5 +1,6 @@
 <?php
 include 'db.php';
+include 'navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +14,28 @@ include 'db.php';
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: transparent !important;
+            border-bottom: none;
+        }
+
+        .nav-list li a {
+            color: #fff !important;
+            text-decoration: none;
+        }
+
+        .nav-list li a:hover {
+            color: #ccc !important;
+        }
+
+        .logo-link .logo-text {
+            color: #fff !important;
         }
 
         .carousel-wrapper {
@@ -36,7 +59,7 @@ include 'db.php';
 
         .testimonial-card {
             width: 300px;
-            background-color:rgb(57, 57, 57);
+            background-color: rgb(57, 57, 57);
             color: #ddd;
             padding: 30px 20px;
             border-radius: 10px;
@@ -46,7 +69,7 @@ include 'db.php';
         }
 
         .testimonial-card::before {
-            content: "“";
+            content: """;
             font-size: 30px;
             color: #ccc;
             position: absolute;
@@ -55,7 +78,7 @@ include 'db.php';
         }
 
         .testimonial-card::after {
-            content: "”";
+            content: """;
             font-size: 30px;
             color: #ccc;
             position: absolute;
@@ -80,14 +103,14 @@ include 'db.php';
             background: none;
             border: none;
             font-size: 2rem;
-            color: #444;
+            color: #ccc;
             cursor: pointer;
             padding: 10px;
             transition: color 0.3s;
         }
 
         .nav-button:hover {
-            color: #000;
+            color: #fff;
         }
 
         html {
@@ -122,24 +145,122 @@ include 'db.php';
             z-index: 2;
         }
 
+        .divider {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(to right, #333, #666, #333);
+            width: 80%;
+            margin: 40px auto;
+            border-radius: 5px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .section-subtitle {
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
         .card {
-            transition: transform 0.3s;
+            background-color: #222;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
         }
 
         .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .card-text {
+            color: #ccc;
+        }
+
+        .btn-dark {
+            background-color: #333;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dark:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+
+        .btn-light {
+            background-color: #fff;
+            color: #111;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-light:hover {
+            background-color: #eee;
             transform: scale(1.05);
         }
 
         textarea {
             resize: none;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+        }
+
+        textarea::placeholder {
+            color: #999;
+        }
+
+        #discussionPosts .card {
+            background-color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .article-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card .card-text {
+            flex-grow: 1;
         }
     </style>
 </head>
 
 <body>
-    <?php
-    require 'navbar.php';
-    ?>
 
     <section>
         <div class="hero-section">
@@ -152,7 +273,7 @@ include 'db.php';
         </div>
     </section>
     
-    <hr style="border: 0; height: 2px; background: linear-gradient(to right, #000, #111, #000); width: 80%; margin: 40px auto; border-radius: 5px;">
+    <hr class="divider">
 
     <section class="articles-section">
         <div class="container text-center">
@@ -198,19 +319,19 @@ include 'db.php';
             </div>
         
             <div class="mt-3">
-                <button class="btn btn-dark rounded-pill px-4 py-2 fw-bold">
-                    <a href="blogs.php" style="text-decoration: none; color: #FFFFFF">View more <i class="fas fa-arrow-right ms-2"></i></a>
-                </button>
+                <a href="blogs.php" class="btn btn-dark rounded-pill px-4 py-2 fw-bold">
+                    View more <i class="fas fa-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <hr style="border: 0; height: 2px; background: linear-gradient(to right, #000, #111, #000); width: 80%; margin: 40px auto; border-radius: 5px;">
+    <hr class="divider">
 
     <section id="articles" class="container py-5">
-        <h2 class="text-center mb-4">Explore Trending Categories</h2>
+        <h2 class="section-title text-center mb-4">Explore Trending Categories</h2>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <img src="Images/Landing_Page/Landing_page_article_1.png" class="card-img-top" alt="Healthy Eating">
                     <div class="card-body">
@@ -220,7 +341,7 @@ include 'db.php';
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <img src="Images/Landing_Page/Landing_page_article_2.jpg" class="card-img-top" alt="Workout Tips">
                     <div class="card-body">
@@ -230,7 +351,7 @@ include 'db.php';
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <img src="Images/Landing_Page/Landing_page_article_3.png" class="card-img-top" alt="Mental Health">
                     <div class="card-body">
@@ -243,9 +364,9 @@ include 'db.php';
         </div>
     </section>
 
-    <hr style="border: 0; height: 2px; background: linear-gradient(to right, #000, #111, #000); width: 80%; margin: 40px auto; border-radius: 5px;">
+    <hr class="divider">
 
-   <h2 class="text-center mb-4">Testimonials</h2>
+    <h2 class="section-title text-center mb-4">Testimonials</h2>
     <div class="carousel-wrapper">
         <button class="nav-button" onclick="prevTestimonial()">❮</button>
         <div class="testimonial-carousel" id="carousel">
@@ -253,11 +374,11 @@ include 'db.php';
         <button class="nav-button" onclick="nextTestimonial()">❯</button>
     </div>
 
-    <hr style="border: 0; height: 2px; background: linear-gradient(to right, #000, #111, #000); width: 80%; margin: 40px auto; border-radius: 5px;">
+    <hr class="divider">
     
     <!-- Discussion Forum -->
     <section id="discussion" class="container py-5">
-        <h2 class="text-center mb-4">Discussion Forum</h2>
+        <h2 class="section-title text-center mb-4">Discussion Forum</h2>
         <div class="card p-4">
             <textarea id="discussionText" class="form-control" placeholder="Start a discussion..."></textarea>
             <button id="postBtn" class="btn btn-dark mt-3 w-100">Post</button>

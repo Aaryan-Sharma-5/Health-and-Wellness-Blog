@@ -177,29 +177,52 @@ function format_date($date_string) {
         }
 
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #111;
+            color: #fff;
             line-height: 1.6;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+        }
+
+        body.article-page .nav-list li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        body.article-page .nav-list li a:hover {
+            color: #1f2937;
+            text-decoration: none;
+        }
+
+        body.article-page .logo-link .logo-text {
+            color: #fff;
+        }
+
+        body.article-page .navbar {
+            background-color: transparent;
+            border-bottom: none;
+        }
+
+        body.article-page .navbar-divider {
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
         /* Article styling */
         .article {
-            background-color: #fff;
-            border-radius: 5px;
+            background-color: #222;
+            border-radius: 12px;
             overflow: hidden;
             margin-bottom: 40px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
 
         .article-header {
             position: relative;
-            height: 400px;
+            height: 450px;
         }
 
         .article-header img {
@@ -213,33 +236,36 @@ function format_date($date_string) {
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 40px 30px 30px;
         }
 
         .article-title {
-            color: #222;
-            font-size: 28px;
+            color: #fff;
+            font-size: 32px;
             font-weight: bold;
             line-height: 1.3;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
         }
 
         .article-meta {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             font-size: 14px;
-            color: #777;
+            color: #ccc;
         }
 
         .article-category {
-            background-color: #f0f0f0;
-            padding: 3px 10px;
-            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: bold;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
         }
 
         .article-author {
@@ -248,41 +274,45 @@ function format_date($date_string) {
         }
 
         .article-author img {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .article-content {
-            padding: 30px;
-            font-size: 16px;
+            padding: 40px;
+            font-size: 17px;
+            color: #e0e0e0;
         }
 
         .article-content p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .article-content h2 {
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 22px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #fff;
         }
 
         .article-content h3 {
-            margin-top: 25px;
-            margin-bottom: 10px;
-            font-size: 18px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #fff;
         }
 
         .article-content ul,
         .article-content ol {
-            margin-bottom: 20px;
-            margin-left: 20px;
+            margin-bottom: 25px;
+            margin-left: 30px;
         }
 
         .article-content li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         /* Like button and interactions */
@@ -290,35 +320,33 @@ function format_date($date_string) {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #eee;
-            padding: 15px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 40px;
         }
 
         .like-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .like-button {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.3s ease, filter 0.3s ease;
         }
 
         .like-button:hover {
             transform: scale(1.2);
-        }
-
-        .like-button.active {
-            color: #e74c3c;
+            filter: brightness(1.2);
         }
 
         .like-count {
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
+            color: #ddd;
         }
 
         .share-container {
@@ -327,111 +355,135 @@ function format_date($date_string) {
         }
 
         .share-button {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background-color: #f5f5f5;
+            background-color: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.3s;
         }
 
         .share-button:hover {
-            background-color: #e0e0e0;
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
         /* Comments section */
         .comments-section {
-            margin-top: 40px;
+            margin-top: 60px;
         }
 
         .section-title {
-            font-size: 22px;
-            margin-bottom: 20px;
+            font-size: 24px;
+            margin-bottom: 30px;
             font-weight: bold;
+            color: #fff;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         .comment-form {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .comment-textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            margin-bottom: 10px;
-            min-height: 100px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 12px;
+            min-height: 120px;
             resize: vertical;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .comment-textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .comment-button {
-            background-color: #333;
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            border-radius: 6px;
             font-size: 14px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
         }
 
         .comment-button:hover {
-            background-color: #555;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .comment {
-            background-color: #fff;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .comment-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .comment-author {
             font-weight: bold;
+            color: #fff;
         }
 
         .comment-date {
-            color: #777;
+            color: #999;
             font-size: 12px;
         }
 
         .comment-content {
-            color: #333;
-            font-size: 14px;
+            color: #ddd;
+            font-size: 15px;
         }
 
         /* Related articles */
         .related-articles {
-            margin-top: 50px;
+            margin-top: 70px;
         }
 
         .related-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 25px;
         }
 
         .related-card {
-            background-color: #fff;
-            border-radius: 5px;
+            background-color: #222;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .related-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
         }
 
         .related-image {
@@ -443,42 +495,50 @@ function format_date($date_string) {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .related-card:hover .related-image img {
+            transform: scale(1.1);
         }
 
         .related-content {
-            padding: 15px;
+            padding: 20px;
         }
 
         .related-title {
             font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: #333;
+            font-size: 17px;
+            margin-bottom: 12px;
+            color: #fff;
+            line-height: 1.4;
         }
 
         .related-date {
             font-size: 12px;
-            color: #777;
-            margin-bottom: 10px;
+            color: #999;
+            margin-bottom: 12px;
         }
 
         .related-excerpt {
             font-size: 14px;
-            color: #555;
-            margin-bottom: 15px;
+            color: #bbb;
+            margin-bottom: 18px;
+            line-height: 1.5;
         }
 
         .read-more {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
-            color: #555;
+            color: #ccc;
             text-decoration: none;
+            transition: color 0.3s;
         }
 
         .read-more:hover {
-            color: #000;
+            color: #fff;
         }
 
         /* Login message */
@@ -488,14 +548,15 @@ function format_date($date_string) {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            padding: 15px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            background-color: rgba(25, 25, 25, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             z-index: 100;
-            max-width: 300px;
+            max-width: 320px;
             text-align: center;
+            color: #fff;
         }
 
         .login-message.show {
@@ -506,40 +567,44 @@ function format_date($date_string) {
         @keyframes fadeIn {
             from {
                 opacity: 0;
+                transform: translate(-50%, -60%);
             }
 
             to {
                 opacity: 1;
+                transform: translate(-50%, -50%);
             }
         }
 
         .login-message button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background-color: #000;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
             color: #fff;
-            border: none;
-            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
         .login-message button:hover {
-            background-color: #333;
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
         /* Status message */
         .status-message {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 10px 15px;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px 20px;
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 14px;
             z-index: 100;
             display: none;
             animation: fadeInUp 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         @keyframes fadeInUp {
@@ -555,6 +620,20 @@ function format_date($date_string) {
         }
 
         /* Responsive design */
+        @media (max-width: 900px) {
+            .article-title {
+                font-size: 28px;
+            }
+
+            .article-header {
+                height: 350px;
+            }
+
+            .article-content {
+                padding: 30px;
+            }
+        }
+
         @media (max-width: 768px) {
             .related-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -566,6 +645,10 @@ function format_date($date_string) {
 
             .article-header {
                 height: 300px;
+            }
+
+            .container {
+                padding: 20px;
             }
         }
 
@@ -581,17 +664,27 @@ function format_date($date_string) {
             .article-interactions {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
+                gap: 20px;
+                padding: 20px;
             }
 
             .share-container {
                 align-self: flex-end;
             }
+
+            .article-content {
+                padding: 20px;
+                font-size: 16px;
+            }
+
+            .article-title {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 
-<body>
+<body class="article-page">
     <div class="container">
         <article class="article">
             <div class="article-header">
@@ -632,7 +725,7 @@ function format_date($date_string) {
                     <button type="submit" name="add_comment" class="comment-button">Post Comment</button>
                 </form>
             <?php else: ?>
-                <p style="margin-bottom: 20px;">Please <a href="signin.php">log in</a> to post a comment.</p>
+                <p style="margin-bottom: 20px; color: #aaa;">Please <a href="signin.php" style="color: #fff; text-decoration: underline;">log in</a> to post a comment.</p>
             <?php endif; ?>
 
             <?php if (!empty($comments)): ?>
@@ -648,7 +741,7 @@ function format_date($date_string) {
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>No comments yet. Be the first to share your thoughts!</p>
+                <p style="color: #aaa; font-style: italic;">No comments yet. Be the first to share your thoughts!</p>
             <?php endif; ?>
         </section>
 
@@ -691,7 +784,7 @@ function format_date($date_string) {
         const userLoggedIn = <?php echo $user_logged_in ? 'true' : 'false'; ?>;
 
         // Function to show status message
-        function showStatus(message, duration = 2000) {
+        function showStatus(message, duration = 2500) {
             const statusEl = document.getElementById('statusMessage');
             statusEl.textContent = message;
             statusEl.style.display = 'block';

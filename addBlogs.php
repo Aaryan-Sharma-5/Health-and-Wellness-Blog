@@ -102,32 +102,38 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Blog Post</title>
     <style>
-        /* Black and White Theme */
-        :root {
-            --primary-color: #000000;
-            --secondary-color: #333333;
-            --accent-color: #666666;
-            --background-color: #ffffff;
-            --text-color: #000000;
-            --error-color: #ff0000;
-            --success-color: #008000;
-            --border-color: #cccccc;
-        }
-        
+        /* Dark Theme - Matching Categories Page */
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--background-color);
+            background-color: #111;
+            color: #fff;
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
         
-        .header {
-            background-color: var(--primary-color);
-            color: var(--background-color);
-            padding: 1rem 0;
-            text-align: center;
+        /* Add matching navbar styles from categories page */
+        body.add-blogs-page .nav-list li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        body.add-blogs-page .nav-list li a:hover {
+            color: #1f2937;
+            text-decoration: none;
+        }
+
+        body.add-blogs-page .logo-link .logo-text {
+            color: #fff;
+        }
+
+        body.add-blogs-page .navbar {
+            background-color: transparent;
+            border-bottom: none;
+        }
+
+        body.add-blogs-page .navbar-divider {
+            background-color: rgba(255, 255, 255, 0.2);
         }
         
         .container {
@@ -137,38 +143,61 @@ if ($result->num_rows > 0) {
         }
         
         .page-title {
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            color: var(--primary-color);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: #ccc;
         }
         
         .blog-form {
-            background-color: #f9f9f9;
+            background-color: rgba(30, 30, 30, 0.8);
             padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
-            color: var(--secondary-color);
+            color: #fff;
         }
         
         input[type="text"],
         select,
         textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
+            padding: 12px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 5px;
             font-size: 16px;
+            color: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #666;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+        }
+        
+        input[type="file"] {
+            padding: 10px 0;
         }
         
         textarea {
@@ -177,7 +206,7 @@ if ($result->num_rows > 0) {
         }
         
         .error {
-            color: var(--error-color);
+            color: #ff5555;
             font-size: 14px;
             display: block;
             margin-top: 5px;
@@ -186,86 +215,103 @@ if ($result->num_rows > 0) {
         .alert {
             padding: 15px;
             margin-bottom: 20px;
-            border-radius: 4px;
+            border-radius: 5px;
         }
         
         .alert-success {
-            color: var(--success-color);
-            background-color: #f0fff0;
-            border: 1px solid var(--success-color);
+            color: #4eff9f;
+            background-color: rgba(78, 255, 159, 0.1);
+            border: 1px solid rgba(78, 255, 159, 0.3);
         }
         
         .alert-danger {
-            color: var(--error-color);
-            background-color: #fff0f0;
-            border: 1px solid var(--error-color);
+            color: #ff5555;
+            background-color: rgba(255, 85, 85, 0.1);
+            border: 1px solid rgba(255, 85, 85, 0.3);
         }
         
         .form-actions {
             margin-top: 30px;
             display: flex;
-            gap: 10px;
+            justify-content: center;
+            gap: 15px;
         }
         
         .btn {
-            padding: 12px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
         
         .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--background-color);
+            background-color: #1a1a1a;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .btn-primary:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .btn-secondary {
-            background-color: var(--accent-color);
-            color: var(--background-color);
-        }
-        
-        .btn-secondary:hover {
-            background-color: #999999;
-        }
-        
-        .footer {
-            background-color: var(--primary-color);
-            color: var(--background-color);
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 30px;
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         small {
             font-size: 12px;
-            color: var(--accent-color);
+            color: #999;
         }
         
         /* Image preview styles */
         .image-preview {
             max-width: 300px;
-            margin-top: 10px;
+            margin: 15px auto;
             display: none;
         }
         
         .image-preview img {
             max-width: 100%;
-            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Custom file input */
+        .file-input-container {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .file-input-label {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #1a1a1a;
+            color: #fff;
+            border: 1px solid #333;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover {
+            background-color: #333;
+        }
+        
+        .file-name {
+            margin-left: 10px;
+            font-size: 14px;
+            color: #ccc;
         }
     </style>
 </head>
-<body>
-  <?php include 'navbar.php' ?>
+<body class="add-blogs-page">
+    <?php include 'navbar.php' ?>
     
     <div class="container">
         <h1 class="page-title">Create New Blog Post</h1>
+        <p class="page-subtitle">Share your wellness knowledge and experiences with our community</p>
         
         <?php if (!empty($success_message)): ?>
             <div class="alert alert-success">
@@ -281,8 +327,8 @@ if ($result->num_rows > 0) {
         
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" class="blog-form">
             <div class="form-group">
-                <label for="title">Title*</label>
-                <input type="text" id="title" name="title" value="<?php echo $title; ?>" required>
+                <label for="title">Blog Title*</label>
+                <input type="text" id="title" name="title" value="<?php echo $title; ?>" placeholder="Enter an engaging title for your blog post" required>
                 <span class="error"><?php echo $titleErr; ?></span>
             </div>
             
@@ -300,11 +346,18 @@ if ($result->num_rows > 0) {
                     <option value="8">Spiritual Health</option>
                     <option value="9">Disease Management</option>
                 </select>
+                <span class="error"><?php echo $categoryErr; ?></span>
             </div>
             
             <div class="form-group">
                 <label for="blog_image">Cover Image</label>
-                <input type="file" id="blog_image" name="blog_image" accept="image/*" onchange="previewImage(this)">
+                <div class="file-input-container">
+                    <label class="file-input-label">
+                        Choose File
+                        <input type="file" id="blog_image" name="blog_image" accept="image/*" onchange="previewImage(this)" style="display: none;">
+                    </label>
+                    <span class="file-name" id="fileName">No file chosen</span>
+                </div>
                 <small>Recommended size: 1200 x 630 pixels</small>
                 <div id="imagePreview" class="image-preview">
                     <img id="preview" src="#">
@@ -313,7 +366,7 @@ if ($result->num_rows > 0) {
             
             <div class="form-group">
                 <label for="content">Content*</label>
-                <textarea id="content" name="content" rows="10" required><?php echo $content; ?></textarea>
+                <textarea id="content" name="content" rows="10" placeholder="Write your blog content here..." required><?php echo $content; ?></textarea>
                 <span class="error"><?php echo $contentErr; ?></span>
             </div>
             
@@ -329,6 +382,7 @@ if ($result->num_rows > 0) {
     function previewImage(input) {
         var preview = document.getElementById('preview');
         var previewDiv = document.getElementById('imagePreview');
+        var fileName = document.getElementById('fileName');
         
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -336,12 +390,14 @@ if ($result->num_rows > 0) {
             reader.onload = function(e) {
                 preview.src = e.target.result;
                 previewDiv.style.display = 'block';
+                fileName.textContent = input.files[0].name;
             }
             
             reader.readAsDataURL(input.files[0]);
         } else {
             preview.src = '';
             previewDiv.style.display = 'none';
+            fileName.textContent = 'No file chosen';
         }
     }
     </script>

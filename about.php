@@ -12,16 +12,16 @@ include 'navbar.php'
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #000000;
-      --primary-light: #f0f0f0;
-      --secondary-color: #2c3e50;
+      --primary-color: #ffffff;
+      --primary-light: #1f2937;
+      --secondary-color: #ccc;
       --accent-color: #3498db;
-      --text-color: #333;
-      --light-text: #6c757d;
-      --background: #f9f9f9;
-      --card-background: #ffffff;
+      --text-color: #fff;
+      --light-text: #ccc;
+      --background: #111;
+      --card-background: #1a1a1a;
       --border-radius: 12px;
-      --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       --transition: all 0.3s ease;
     }
 
@@ -34,8 +34,31 @@ include 'navbar.php'
       line-height: 1.8;
     }
 
+    body.about-page .nav-list li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    body.about-page .nav-list li a:hover {
+      color: #1f2937;
+      text-decoration: none;
+    }
+
+    body.about-page .logo-link .logo-text {
+      color: #fff;
+    }
+
+    body.about-page .navbar {
+      background-color: transparent;
+      border-bottom: none;
+    }
+
+    body.about-page .navbar-divider {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
     .container {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -60,7 +83,7 @@ include 'navbar.php'
     }
 
     h2 {
-      color: var(--secondary-color);
+      color: var(--primary-color);
       margin-top: 30px;
       font-size: 1.8rem;
       position: relative;
@@ -82,6 +105,7 @@ include 'navbar.php'
     p {
       line-height: 1.8;
       margin-bottom: 20px;
+      color: var(--light-text);
     }
 
     .offerings {
@@ -108,7 +132,7 @@ include 'navbar.php'
     }
 
     .offering-card h3 {
-      color: var(--secondary-color);
+      color: var(--primary-color);
       margin-top: 0;
       font-size: 1.3rem;
       display: flex;
@@ -122,7 +146,7 @@ include 'navbar.php'
 
     .offering-card p {
       margin-bottom: 0;
-      color: var(--text-color);
+      color: var(--light-text);
     }
 
     .membership-options {
@@ -135,10 +159,10 @@ include 'navbar.php'
     .membership-card {
       flex: 1;
       min-width: 200px;
-      background: linear-gradient(to bottom right, white, #f8f9fa);
+      background: linear-gradient(to bottom right, #1a1a1a, #252525);
       border-radius: var(--border-radius);
       padding: 25px;
-      border: 1px solid #eee;
+      border: 1px solid #333;
       transition: var(--transition);
       text-align: center;
     }
@@ -155,7 +179,7 @@ include 'navbar.php'
     }
 
     .membership-card h3 {
-      color: var(--secondary-color);
+      color: var(--primary-color);
       margin: 10px 0;
     }
 
@@ -180,7 +204,7 @@ include 'navbar.php'
     .contact-button {
       display: inline-block;
       background-color: var(--primary-color);
-      color: white;
+      color: #111;
       padding: 12px 25px;
       border-radius: 30px;
       font-weight: 500;
@@ -189,11 +213,10 @@ include 'navbar.php'
     }
 
     .contact-button:hover {
-      background-color: var(--secondary-color);
-      color: white;
+      background-color: var(--accent-color);
+      color: var(--text-color);
       transform: scale(1.05);
     }
-
 
     .emoji {
       font-size: 1.4em;
@@ -209,7 +232,6 @@ include 'navbar.php'
     }
 
     @media (max-width: 768px) {
-
       .offerings,
       .membership-options {
         flex-direction: column;
@@ -222,7 +244,7 @@ include 'navbar.php'
   </style>
 </head>
 
-<body>
+<body class="about-page">
   <div class="container">
     <div class="content-section">
       <h2>About Us</h2>
