@@ -37,6 +37,7 @@ $sql = "CREATE TABLE IF NOT EXISTS articles (
     category_id INT,
     author_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE SET NULL,
     FOREIGN KEY (author_id) REFERENCES users(user_id) ON DELETE CASCADE
 );";
@@ -62,4 +63,5 @@ $sql = "CREATE TABLE IF NOT EXISTS article_likes (
     FOREIGN KEY (article_id) REFERENCES articles(article_id) ON DELETE CASCADE
 );";
 $connection->query($sql);
+
 ?>

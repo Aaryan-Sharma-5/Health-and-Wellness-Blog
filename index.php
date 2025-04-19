@@ -19,7 +19,6 @@ include 'db.php';
             font-family: Arial, Helvetica, sans-serif;
             margin: 0;
             padding: 40px;
-            background: #f3f3f3;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -37,11 +36,10 @@ include 'db.php';
 
         .testimonial-card {
             width: 300px;
-            background-color: #1e1e1e;
+            background-color:rgb(57, 57, 57);
             color: #ddd;
             padding: 30px 20px;
             border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
             position: relative;
             flex-shrink: 0;
             transition: all 0.4s ease;
@@ -97,16 +95,31 @@ include 'db.php';
         }
 
         .hero-section {
-            background-image: url('Images/Landing_Page/Landing_page_article_1.png');
+            position: relative;
+            background-image: url('Images/Landing_Page/Landing_page_main.png');
             background-size: cover;
             background-position: center;
-            height: 60vh;
+            height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-section .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+            z-index: 1;
+        }
+
+        .hero-section .container {
+            position: relative;
+            z-index: 2;
         }
 
         .card {
@@ -124,7 +137,6 @@ include 'db.php';
 </head>
 
 <body>
-
     <?php
     require 'navbar.php';
     ?>
@@ -134,66 +146,67 @@ include 'db.php';
             <div class="overlay"></div>
             <div class="container">
                 <h1>Embrace Wellness: Your Journey Starts Here</h1>
-                <p>Welcome to our health and wellness sanctuary...</p>
+                <p>Welcome to our health and wellness sanctuary, where we inspire you to lead a balanced life. <br> Discover insightful articles, tips, and community support tailored to your wellness journey.</p>
                 <a href="#articles" class="btn btn-light rounded-pill px-4 py-2 fw-bold">Explore Now</a>
             </div>
         </div>
     </section>
+    
+    <hr style="border: 0; height: 2px; background: linear-gradient(to right, #000, #111, #000); width: 80%; margin: 40px auto; border-radius: 5px;">
 
-    <!-- Hero Section -->
     <section class="articles-section">
         <div class="container text-center">
             <h2 class="section-title">Explore Trending Articles</h2>
             <p class="section-subtitle">Discover the latest insights in health and wellness.</p>
 
             <div class="row justify-content-center mt-4">
-                <!-- Article Card 1 -->
                 <div class="col-md-4 mb-4">
-                    <div class="card article-card">
-                        <img src="Images/Categories/Category_2.jpg" class="card-img-top" alt="Healthy Diet">
-                        <div class="card-body">
-                            <span class="badge badge-readtime bg-lightgreen">10 minute read</span>
-                            <h5 class="card-title">Top Foods for a Healthy Diet</h5>
-                            <p class="card-text">Discover the super foods that can boost your health and vitality.</p>
+                    <a href="article.php?id=38" style="text-decoration: none; color: inherit;">
+                        <div class="card article-card">
+                            <img src="Images/Categories/Category_2.jpg" class="card-img-top" alt="Healthy Diet">
+                            <div class="card-body">
+                                <h5 class="card-title">Top Foods for a Healthy Diet</h5>
+                                <p class="card-text">Discover the super foods that can boost your health and vitality.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
-                <!-- Article Card 2 -->
                 <div class="col-md-4 mb-4">
-                    <div class="card article-card">
-                        <img src="Images/Categories/Category_8.png" class="card-img-top img-fluid" alt="Meditation">
-                        <div class="card-body">
-                            <span class="badge badge-readtime bg-lightgreen">5 minute read</span>
-                            <h5 class="card-title">The Benefits of Meditation</h5>
-                            <p class="card-text">Learn how mindfulness can enhance your mental well-being and reduce stress.</p>
+                    <a href="article.php?id=39" style="text-decoration: none; color: inherit;">
+                        <div class="card article-card">
+                            <img src="Images/Categories/Category_8.png" class="card-img-top img-fluid" alt="Meditation">
+                            <div class="card-body">
+                                <h5 class="card-title">The Benefits of Meditation</h5>
+                                <p class="card-text">Learn how mindfulness can enhance your mental well-being and reduce stress.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
-                <!-- Article Card 3 -->
                 <div class="col-md-4 mb-4">
-                    <div class="card article-card">
-                        <img src="Images/Categories/Category_3.jpg" class="card-img-top" alt="Home Workout">
-                        <div class="card-body">
-                            <span class="badge badge-readtime bg-lightgreen">7 minute read</span>
-                            <h5 class="card-title">Effective Home Workouts</h5>
-                            <p class="card-text">Stay fit with these simple yet effective home workout routines.</p>
+                    <a href="article.php?id=40" style="text-decoration: none; color: inherit;">
+                        <div class="card article-card">
+                            <img src="Images/Categories/Category_3.jpg" class="card-img-top" alt="Home Workout">
+                            <div class="card-body">
+                                <h5 class="card-title">Effective Home Workouts</h5>
+                                <p class="card-text">Stay fit with these simple yet effective home workout routines.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
-
-            <!-- View More Button -->
+        
             <div class="mt-3">
                 <button class="btn btn-dark rounded-pill px-4 py-2 fw-bold">
-                    <a href="#categories.php" style="text-decoration: none; color: #FFFFFF">View more <i class="fas fa-arrow-right ms-2"></i></a>
+                    <a href="blogs.php" style="text-decoration: none; color: #FFFFFF">View more <i class="fas fa-arrow-right ms-2"></i></a>
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- Articles Section -->
+    <hr style="border: 0; height: 2px; background: linear-gradient(to right, #000, #111, #000); width: 80%; margin: 40px auto; border-radius: 5px;">
+
     <section id="articles" class="container py-5">
         <h2 class="text-center mb-4">Explore Trending Categories</h2>
         <div class="row">
@@ -203,7 +216,7 @@ include 'db.php';
                     <div class="card-body">
                         <h5 class="card-title">Healthy Eating Habits</h5>
                         <p class="card-text">Learn how to maintain a balanced diet for better health.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="blogs.php?category=2" class="btn btn-dark">Read More</a>
                     </div>
                 </div>
             </div>
@@ -213,7 +226,7 @@ include 'db.php';
                     <div class="card-body">
                         <h5 class="card-title">Best Fitness Routines</h5>
                         <p class="card-text">Discover the best workout routines to stay fit.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="blogs.php?category=3" class="btn btn-dark">Read More</a>
                     </div>
                 </div>
             </div>
@@ -223,14 +236,16 @@ include 'db.php';
                     <div class="card-body">
                         <h5 class="card-title">Mental Wellness</h5>
                         <p class="card-text">Find out how to manage stress effectively.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="blogs.php?category=1" class="btn btn-dark">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <hr style="border: 0; height: 2px; background: linear-gradient(to right, #000, #111, #000); width: 80%; margin: 40px auto; border-radius: 5px;">
+
+   <h2 class="text-center mb-4">Testimonials</h2>
     <div class="carousel-wrapper">
         <button class="nav-button" onclick="prevTestimonial()">❮</button>
         <div class="testimonial-carousel" id="carousel">
@@ -238,12 +253,14 @@ include 'db.php';
         <button class="nav-button" onclick="nextTestimonial()">❯</button>
     </div>
 
+    <hr style="border: 0; height: 2px; background: linear-gradient(to right, #000, #111, #000); width: 80%; margin: 40px auto; border-radius: 5px;">
+    
     <!-- Discussion Forum -->
     <section id="discussion" class="container py-5">
         <h2 class="text-center mb-4">Discussion Forum</h2>
         <div class="card p-4">
             <textarea id="discussionText" class="form-control" placeholder="Start a discussion..."></textarea>
-            <button id="postBtn" class="btn btn-primary mt-3 w-100">Post</button>
+            <button id="postBtn" class="btn btn-dark mt-3 w-100">Post</button>
         </div>
         <div id="discussionPosts" class="mt-4"></div>
     </section>

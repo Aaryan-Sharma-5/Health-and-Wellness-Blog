@@ -1,43 +1,41 @@
 <?php
-// Include database connectionection file
-include 'db.php';
 session_start();
+include 'db.php';
 
-// Initialize variables
+if (!isset($_SESSION['user-id'])) {
+    $_SESSION['redirect_after_login'] = 'addBlogs.php';
+    header("Location: signin.php");
+    exit;
+}
+
 $title = $content = $category_id = $image_url = "";
 $titleErr = $contentErr = $categoryErr = "";
 $success_message = "";
 $error_message = "";
 
-// Process form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate title
     if (empty($_POST["title"])) {
         $titleErr = "Title is required";
     } else {
         $title = test_input($_POST["title"]);
     }
     
-    // Validate content
     if (empty($_POST["content"])) {
         $contentErr = "Content is required";
     } else {
         $content = test_input($_POST["content"]);
     }
     
-    // Validate category
     if (empty($_POST["category_id"])) {
         $categoryErr = "Category is required";
     } else {
         $category_id = test_input($_POST["category_id"]);
     }
     
-    // Handle image upload
     $target_dir = "uploads/";
     $image_url = "";
     
     if(isset($_FILES["blog_image"]) && $_FILES["blog_image"]["name"] != "") {
-        // Create uploads directory if it doesn't exist
         if (!file_exists($target_dir)) {
             mkdir($target_dir, 0777, true);
         }
@@ -45,14 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $target_file = $target_dir . basename($_FILES["blog_image"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         
-        // Check if image file is a actual image
         $check = getimagesize($_FILES["blog_image"]["tmp_name"]);
         if($check !== false) {
-            // Create unique filename
             $image_url = $target_dir . uniqid() . "." . $imageFileType;
             
             if (move_uploaded_file($_FILES["blog_image"]["tmp_name"], $image_url)) {
-                // File uploaded successfully
             } else {
                 $error_message = "Sorry, there was an error uploading your file.";
             }
@@ -61,11 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     
-    // If no errors, insert into database
     if (empty($titleErr) && empty($contentErr) && empty($categoryErr) && empty($error_message)) {
-        // Get current user ID (assuming user is logged in)
-        // For testing purposes, we'll use user-id = 1
-        // In a real application, you would get this from the session
+        $author_id = $_SESSION['user-id'];
         $author_id = isset($_SESSION['user-id']) ? $_SESSION['user-id'] : 1;
         
         $sql = "INSERT INTO articles (title, content, image_url, category_id, author_id, created_at) 
@@ -76,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($stmt->execute()) {
             $success_message = "Blog post created successfully!";
-            // Clear form data
             $title = $content = $category_id = "";
         } else {
             $error_message = "Error: " . $connection->error;
@@ -86,7 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Function to sanitize input data
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -94,7 +84,6 @@ function test_input($data) {
     return $data;
 }
 
-// Get categories for dropdown
 $categories = array();
 $sql = "SELECT category_id, category_name FROM categories";
 $result = $connection->query($sql);
@@ -104,33 +93,6 @@ if ($result->num_rows > 0) {
     }
 }
 
-// If no categories exist, add some default ones
-if (empty($categories)) {
-    $default_categories = [
-        ['name' => 'Technology', 'description' => 'Technology related articles'],
-        ['name' => 'Travel', 'description' => 'Travel experiences and guides'],
-        ['name' => 'Food', 'description' => 'Recipes and food reviews'],
-        ['name' => 'Lifestyle', 'description' => 'Lifestyle tips and experiences'],
-        ['name' => 'Health', 'description' => 'Health and wellness articles']
-    ];
-    
-    foreach ($default_categories as $cat) {
-        $sql = "INSERT INTO categories (category_name, category_description) VALUES (?, ?)";
-        $stmt = $connection->prepare($sql);
-        $stmt->bind_param("ss", $cat['name'], $cat['description']);
-        $stmt->execute();
-        $stmt->close();
-    }
-    
-    // Fetch categories again
-    $sql = "SELECT category_id, category_name FROM categories";
-    $result = $connection->query($sql);
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $categories[] = $row;
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>

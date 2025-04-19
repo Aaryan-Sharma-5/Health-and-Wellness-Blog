@@ -366,10 +366,9 @@
   <div class="footer-container">
     <div class="footer-navbar-container" style="margin-top: 0.1rem; padding-top: 0.1rem;">
       <div class="footer-company-details">
-        <!-- <div class="footer-details-inner"> -->
         <div class="footer-logo">
           <a href="index.php" class="logo-link">
-            <img src="logo.png" class="logo-img" />
+            <img src="Images/logo.png" class="logo-img" />
           </a>
         </div>
         <div class="footer-content">
@@ -420,28 +419,30 @@
         <div class="footer-navbar-col">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="#"> Home </a></li>
-            <li><a href="#"> About Us </a></li>
-            <li><a href="#"> Blog </a></li>
-            <li><a href="#"> Categories </a></li>
-            <li><a href="#"> Terms & Conditions </a></li>
+            <li><a href="index.php"> Home </a></li>
+            <li><a href="about.php"> About Us </a></li>
+            <li><a href="blogs.php"> Blog </a></li>
+            <li><a href="categories.php"> Categories </a></li>
+            <li><a href="contact.php"> Contact us </a></li>
           </ul>
         </div>
         <div class="footer-navbar-col">
           <h3>Categories</h3>
           <ul>
-            <li><a href="#"> Fitness </a></li>
-            <li><a href="#"> Mental Wellness </a></li>
-            <li><a href="#"> Nutrition </a></li>
-            <li><a href="#"> Sleep </a></li>
-            <li><a href="#"> Preventive Care </a></li>
+            <li><a href="blogs.php?category=3"> Fitness </a></li>
+            <li><a href="blogs.php?category=1"> Mental Wellness </a></li>
+            <li><a href="blogs.php?category=2"> Nutrition </a></li>
+            <li><a href="blogs.php?category=4"> Sleep </a></li>
+            <li><a href="blogs.php?category=9"> Preventive Care </a></li>
           </ul>
         </div>
       </div>
     </div>
 
+    <hr>
+
     <div class="footer-copyright" style="padding-top: 0.1rem;">
-      <p style="text-align: center;">2025 © Health and Wellness - All Rights Reserved</p>
+      <p style="text-align: center;">2025 © Health and Wellness - Made by 12, 17, 23</p>
     </div>
   </div>
 </div>

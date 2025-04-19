@@ -6,11 +6,9 @@ if (session_status() == PHP_SESSION_NONE) {
 
 include 'db.php';
 
-// Check if user is logged in
 $user_logged_in = isset($_SESSION['user-id']) && !empty($_SESSION['user-id']);
 $current_user_id = $user_logged_in ? $_SESSION['user-id'] : 0;
 
-// Get article ID from URL
 $article_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if (!$article_id) {
@@ -18,7 +16,6 @@ if (!$article_id) {
     exit;
 }
 
-// Handle like/unlike via AJAX
 if (isset($_POST['action']) && $_POST['action'] == 'like') {
     header('Content-Type: application/json');
 
@@ -27,7 +24,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'like') {
         exit;
     }
 
-    // Check if user already liked this article
     $check_sql = "SELECT * FROM article_likes WHERE article_id = ? AND user_id = ?";
     $check_stmt = $connection->prepare($check_sql);
     $check_stmt->bind_param("ii", $article_id, $current_user_id);
@@ -35,13 +31,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'like') {
     $check_result = $check_stmt->get_result();
 
     if ($check_result->num_rows > 0) {
-        // User already liked this article, so remove the like
         $delete_sql = "DELETE FROM article_likes WHERE article_id = ? AND user_id = ?";
         $delete_stmt = $connection->prepare($delete_sql);
         $delete_stmt->bind_param("ii", $article_id, $current_user_id);
 
         if ($delete_stmt->execute()) {
-            // Get updated like count
             $count_sql = "SELECT COUNT(*) AS likes_count FROM article_likes WHERE article_id = ?";
             $count_stmt = $connection->prepare($count_sql);
             $count_stmt->bind_param("i", $article_id);
@@ -54,13 +48,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'like') {
             echo json_encode(['status' => 'error', 'message' => 'Failed to unlike article']);
         }
     } else {
-        // User hasn't liked this article yet, so add a like
         $insert_sql = "INSERT INTO article_likes (article_id, user_id) VALUES (?, ?)";
         $insert_stmt = $connection->prepare($insert_sql);
         $insert_stmt->bind_param("ii", $article_id, $current_user_id);
 
         if ($insert_stmt->execute()) {
-            // Get updated like count
             $count_sql = "SELECT COUNT(*) AS likes_count FROM article_likes WHERE article_id = ?";
             $count_stmt = $connection->prepare($count_sql);
             $count_stmt->bind_param("i", $article_id);
@@ -73,11 +65,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'like') {
             echo json_encode(['status' => 'error', 'message' => 'Failed to like article']);
         }
     }
-
     exit;
 }
 
-// Handle adding comments
 if (isset($_POST['add_comment']) && $user_logged_in) {
     $comment_content = trim($_POST['comment_content']);
 
@@ -87,17 +77,14 @@ if (isset($_POST['add_comment']) && $user_logged_in) {
         $comment_stmt->bind_param("iis", $article_id, $current_user_id, $comment_content);
 
         if ($comment_stmt->execute()) {
-            // Refresh the page to show the new comment
             header("Location: article.php?id=$article_id");
             exit;
         }
     }
 }
 
-
 include 'navbar.php';
 
-// Fetch the article with author and category details
 $articleQuery = "SELECT a.article_id, a.title, a.content, a.image_url, a.created_at, 
                        c.category_name, c.category_id, u.username as author_name, u.user_id as author_id,
                        (SELECT COUNT(*) FROM article_likes WHERE article_id = a.article_id) AS likes_count,
@@ -113,14 +100,12 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
-    // Article not found, redirect to blogs page
     header('Location: blogs.php');
     exit;
 }
 
 $article = $result->fetch_assoc();
 
-// Fetch comments for this article
 $commentsQuery = "SELECT c.comment_id, c.comment_text as content, c.created_at, u.username, u.user_id
                  FROM comments c
                  LEFT JOIN users u ON c.user_id = u.user_id
@@ -137,7 +122,6 @@ while ($comment = $commentsResult->fetch_assoc()) {
     $comments[] = $comment;
 }
 
-// Fetch related articles (same category, excluding current)
 $relatedQuery = "SELECT a.article_id, a.title, LEFT(a.content, 150) as excerpt, a.image_url, 
                        a.created_at, c.category_name
                 FROM articles a
@@ -153,18 +137,25 @@ $relatedResult = $relatedStmt->get_result();
 
 $relatedArticles = [];
 while ($related = $relatedResult->fetch_assoc()) {
-    // Add ellipsis to excerpt if it's truncated
     if (strlen($related['excerpt']) >= 150) {
         $related['excerpt'] .= '...';
     }
     $relatedArticles[] = $related;
 }
 
-// Helper function to format date
-function format_date($date_string)
-{
-    $date = new DateTime($date_string);
-    return $date->format('F j, Y');
+function format_date($date_string) {
+    if (empty($date_string)) return 'Date unavailable';
+    
+    try {
+        $date = new DateTime($date_string);
+        return $date->format('F j, Y');
+    } catch (Exception $e) {
+        $timestamp = strtotime($date_string);
+        if ($timestamp === false) {
+            return 'Invalid date';
+        }
+        return date('F j, Y', $timestamp);
+    }
 }
 
 ?>
@@ -602,7 +593,6 @@ function format_date($date_string)
 
 <body>
     <div class="container">
-        <!-- Main Article -->
         <article class="article">
             <div class="article-header">
                 <img src="<?php echo htmlspecialchars($article['image_url'] ?? 'images/default-header.jpg'); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>">
@@ -633,7 +623,6 @@ function format_date($date_string)
             </div>
         </article>
 
-        <!-- Comments Section -->
         <section class="comments-section">
             <h2 class="section-title">Comments (<?php echo count($comments); ?>)</h2>
 

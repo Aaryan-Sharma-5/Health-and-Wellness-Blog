@@ -265,7 +265,7 @@ if (session_status() == PHP_SESSION_NONE) {
               <div class="dropdown-header">
                 <span class="user-name"><?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest' ?></span>
               </div>
-              <li><a href="index.php">Dashboard</a></li>
+              <li><a href="dashboard.php">Dashboard</a></li>
               <li><a href="addBlogs.php">Add Blog</a></li>
               <li><a href="logout.php">Logout</a></li>
             </ul>
