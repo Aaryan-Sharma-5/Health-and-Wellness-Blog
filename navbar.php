@@ -1,6 +1,8 @@
 <?php
 require 'db.php';
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 ?>
 
 <!DOCTYPE html>
@@ -264,6 +266,7 @@ session_start();
                 <span class="user-name"><?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest' ?></span>
               </div>
               <li><a href="index.php">Dashboard</a></li>
+              <li><a href="addBlogs.php">Add Blog</a></li>
               <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
