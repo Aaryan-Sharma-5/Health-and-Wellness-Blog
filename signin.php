@@ -5,8 +5,6 @@ session_start();
 if (isset($_SESSION['signup-success'])) {
   $signupSuccess = $_SESSION['signup-success'];
   unset($_SESSION['signup-success']);
-} else {
-  $signupSuccess = null;
 }
 
 if (isset($_SESSION['user_id'])) {
@@ -16,10 +14,10 @@ if (isset($_SESSION['user_id'])) {
 
 if (isset($_POST['submit'])) {
   $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  $password = filter_var(($_POST['password']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
   if (!$email) {
-    $_SESSION['signin'] = 'Email is Incorrect';
+    $_SESSION['signin'] = 'Email is required';
   } elseif (!$password) {
     $_SESSION['signin'] = 'Password required';
   } else {
@@ -33,7 +31,6 @@ if (isset($_POST['submit'])) {
       $db_password = $user_record['password'];
 
       if (password_verify($password, $db_password)) {
-        // Set session for access control
         $_SESSION['user-id'] = $user_record['user_id'];
         $_SESSION['username'] = $user_record['username'];
         $_SESSION['signin-success'] = "User successfully logged in";
@@ -66,7 +63,7 @@ if (isset($_POST['submit'])) {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     body {
@@ -82,14 +79,15 @@ if (isset($_POST['submit'])) {
       max-width: 1000px;
       height: 80%;
       display: flex;
-      overflow: hidden;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      overflow: hidden;
     }
 
     .left-side {
-      background-color: rgb(0, 0, 0);
+      background-color: #000;
       color: white;
-      width: 60%;
+      width: 50%;
       padding: 60px;
       display: flex;
       flex-direction: column;
@@ -125,10 +123,15 @@ if (isset($_POST['submit'])) {
       border-bottom: 1px solid white;
     }
 
-    .form-group i {
+    .form-group .icon {
       position: absolute;
       left: 0;
-      top: 12px;
+      top: 10px;
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       color: white;
     }
 
@@ -159,7 +162,6 @@ if (isset($_POST['submit'])) {
       cursor: pointer;
       font-size: 1rem;
       margin-top: 10px;
-      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
     }
 
     .btn-sign-in:hover {
@@ -168,11 +170,11 @@ if (isset($_POST['submit'])) {
 
     .right-side {
       background-color: #e0e0e0;
-      width: 60%;
+      width: 50%;
       padding: 60px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       text-align: center;
     }
@@ -180,17 +182,30 @@ if (isset($_POST['submit'])) {
     .right-side h1 {
       font-size: 2.5rem;
       color: #000;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .right-side p {
       color: #333;
-      margin-bottom: 60px;
       line-height: 1.6;
     }
 
+    .logo-container {
+      margin: 20px 0;
+    }
+
+    .logo-container img {
+      max-width: 100px;
+      height: auto;
+      filter: invert(1);
+    }
+
+    .signup-section {
+      width: 100%;
+    }
+
     .signup-text {
-      margin-top: 60px;
+      margin-bottom: 10px;
       font-size: 1rem;
       color: #333;
     }
@@ -209,19 +224,11 @@ if (isset($_POST['submit'])) {
       padding: 12px 30px;
       cursor: pointer;
       font-size: 1rem;
-      margin-top: 15px;
     }
 
-    .icon {
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 20px;
-      height: 20px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
+    .btn-signup a {
+      text-decoration: none;
+      color: #FFFFFF;
     }
 
     .alert__message {
@@ -236,26 +243,6 @@ if (isset($_POST['submit'])) {
       background-color: #f8d7da;
       color: #721c24;
       border: 1px solid #f5c6cb;
-    }
-
-    .alert__message.success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-
-    .alert {
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      text-align: center;
-    }
-
-    .alert-success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
     }
 
     #top-alert {
@@ -284,7 +271,6 @@ if (isset($_POST['submit'])) {
 
       100% {
         opacity: 0;
-        display: none;
       }
     }
 
@@ -304,15 +290,14 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-  <?php if ($signupSuccess): ?>
-    <div id="top-alert" class="alert alert-success">
+  <?php if (isset($signupSuccess)): ?>
+    <div id="top-alert">
       <?= htmlspecialchars($signupSuccess); ?>
     </div>
   <?php endif; ?>
 
-  <div class="container" style="border-radius: 20px; overflow: hidden;">
+  <div class="container">
     <div class="left-side">
-
       <h1>Sign in to your account</h1>
       <?php if (isset($_SESSION['signin'])): ?>
         <div class="alert__message error">
@@ -331,7 +316,7 @@ if (isset($_POST['submit'])) {
           <span class="icon">🔒</span>
           <input type="password" name="password" id="password" placeholder="Password" required>
           <span class="eye-icon" onclick="togglePassword()">👁️</span>
-          <small><a href="#" class="forgot-password">forgot password?</a></small>
+          <small><a href="signup.php" class="forgot-password">forgot password?</a></small>
         </div>
         <br>
         <button type="submit" name="submit" class="btn-sign-in">Sign In</button>
@@ -339,16 +324,18 @@ if (isset($_POST['submit'])) {
     </div>
 
     <div class="right-side">
-      <h1>Welcome Back to H&W!</h1>
-      <p style="margin-bottom: 20px;">Glad to see you again! Sign in to continue your journey toward better health and well-being with the latest tips, guides, and exclusive content.</p>
-
       <div>
-        <img src="Images/logo.png" alt="Company Logo" style="max-width: 80px; height: auto;">
+        <h1>Welcome Back to H&W!</h1>
+        <p>Glad to see you again! Sign in to continue your journey toward better health and well-being with the latest tips, guides, and exclusive content.</p>
       </div>
 
-      <div>
-        <p class="signup-text" style="margin-bottom: 10px;">Don't have an account? <a href="signup.php" class="signup-link">Sign Up!</a></p>
-        <button class="btn-signup"><a href="signup.php" style="text-decoration:none; color:#FFFFFF">Sign Up</a></button>
+      <div class="logo-container">
+        <img src="Images/logo.png" alt="Company Logo">
+      </div>
+
+      <div class="signup-section">
+        <p class="signup-text">Don't have an account? <a href="signup.php" class="signup-link">Sign Up!</a></p>
+        <button class="btn-signup"><a href="signup.php">Sign Up</a></button>
       </div>
     </div>
   </div>

@@ -1,16 +1,20 @@
 <style>
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
   .footer-5-column {
-    background-color: #dddddd;
+    background-color: #222222;
     padding-top: 3rem;
     margin-top: 2rem;
   }
 
   .footer-5-column p {
-    color: #777777;
+    color: #888888;
   }
 
   .footer-5-column .footer-container {
-    max-width: 90%;
+    max-width: 80%;
     width: 100%;
     margin-right: auto;
     margin-left: auto;
@@ -26,12 +30,13 @@
     margin-bottom: 3rem;
     margin-right: auto;
     margin-left: auto;
+    justify-content: space-between;
   }
 
   .footer-5-column .footer-container .footer-navbar-container .footer-company-details {
-    width: 35%;
+    width: 40%;
     max-width: 100%;
-    flex: 0 0 auto;
+    flex: 0 0 40;
     padding-right: 2rem;
     line-height: 1.428;
   }
@@ -43,11 +48,13 @@
   .footer-5-column .footer-container .footer-navbar-container .footer-company-details .footer-logo img {
     max-width: 100%;
     height: auto;
+    filter: invert(1);
   }
 
   .footer-5-column .footer-container .footer-navbar-container .footer-company-details .footer-logo svg {
     width: 100%;
     height: auto;
+    filter: invert(1);
   }
 
   .footer-5-column .footer-container .footer-navbar-container .footer-company-details .footer-content {
@@ -80,6 +87,10 @@
     padding: 6px;
   }
 
+  .footer-5-column .footer-container .footer-navbar-container .footer-company-details .footer-icons ul li a svg {
+    fill: #888888;
+  }
+
   .footer-5-column .footer-navbar {
     display: flex;
     flex-wrap: wrap;
@@ -87,16 +98,20 @@
     align-items: flex-start;
     flex-grow: 1;
     line-height: 1.428;
+    justify-content: space-between;
+    width: 50%;
   }
 
   .footer-5-column .footer-navbar>.footer-navbar-col {
-    width: 25%;
+    width: 45%;
     flex: 0 0 auto;
+    padding-left: 2rem;
   }
 
-  .footer-5-column .footer-navbar .footer-navbar-col h5 {
+  .footer-5-column .footer-navbar .footer-navbar-col h5,
+  .footer-5-column .footer-navbar .footer-navbar-col h3 {
     margin-bottom: 1.5rem;
-    color: #000;
+    color: #fff;
     overflow-wrap: break-word;
     padding: 0 0.5rem 0 0;
   }
@@ -117,17 +132,17 @@
   .footer-5-column .footer-navbar .footer-navbar-col ul li a {
     font-size: 16px;
     text-decoration: none;
-    color: #777777;
+    color: #888888;
     overflow-wrap: break-word;
   }
 
   .footer-5-column .footer-navbar .footer-navbar-col ul li a:hover {
-    color: #000;
+    color: #fff;
   }
 
   .footer-5-column .footer-copyright {
     padding: 2rem 0;
-    border-top: 1px solid rgb(219, 215, 215);
+    border-top: 1px solid #3a3a3a;
   }
 
   .footer-5-column .footer-copyright p {
@@ -147,6 +162,10 @@
       padding: 0;
       width: 100%;
     }
+
+    .footer-5-column .footer-navbar {
+      width: 100%;
+    }
   }
 
   @media all and (max-width: 992px) {
@@ -160,211 +179,11 @@
       width: 100%;
     }
   }
-
-  .footer-5-column {
-    padding-top: 3rem;
-    margin-top: 2rem;
-
-    p {
-      color: #777777;
-    }
-
-    .footer-container {
-      max-width: 1320px;
-      width: 100%;
-      margin-right: auto;
-      margin-left: auto;
-      padding-left: 12px;
-      padding-right: 12px;
-      box-sizing: border-box;
-
-      .footer-navbar-container {
-        display: flex;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        margin-bottom: 3rem;
-        margin-right: auto;
-        margin-left: auto;
-
-        .footer-company-details {
-          width: 35%;
-          max-width: 100%;
-          flex: 0 0 auto;
-          padding-right: 2rem;
-          line-height: 1.428;
-
-          .footer-logo {
-            width: 60px;
-
-            img {
-              max-width: 100%;
-              height: auto;
-            }
-
-            svg {
-              width: 100%;
-              height: auto;
-            }
-          }
-
-          .footer-content {
-            margin-top: 1rem;
-            font-size: 16px;
-            line-height: 1.8;
-            padding-right: 1rem;
-          }
-
-          .footer-icons {
-            margin-top: 1.5rem;
-
-            ul {
-              display: flex;
-              padding: 0;
-              margin: 0;
-              list-style-type: none;
-
-              li {
-                list-style: none;
-                display: flex;
-                flex-direction: row;
-                margin-right: 14px;
-
-                a {
-                  width: 30px;
-                  padding: 6px;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    .footer-navbar {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      align-items: flex-start;
-      flex-grow: 1;
-      line-height: 1.428;
-      gap: 2rem;
-
-      >.footer-navbar-col {
-        width: 40%;
-        flex: 0 0 auto;
-      }
-
-      .footer-navbar-col {
-        h5 {
-          margin-bottom: 1rem;
-          color: #000;
-          overflow-wrap: break-word;
-          padding: 0 0.5rem 0 0;
-        }
-
-        ul {
-          padding: 0 0.5rem 0 0;
-          margin: 0;
-
-          li {
-            list-style: none;
-
-            &:not(:last-child) {
-              margin-bottom: 1rem;
-            }
-
-            a {
-              font-size: 16px;
-              text-decoration: none;
-              color: #777777;
-              overflow-wrap: break-word;
-
-              &:hover {
-                color: #000;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    .footer-copyright {
-      padding: 2rem 0;
-      border-top: 1px solid rgb(219, 215, 215);
-
-      p {
-        font-size: 14px;
-        margin-bottom: 0;
-      }
-    }
-  }
-
-  @media all and (max-width: 1140px) {
-    .footer-5-column {
-      .footer-container {
-        .footer-navbar-container {
-          row-gap: 3rem;
-
-          .footer-company-details {
-            padding: 0;
-            width: 100%;
-          }
-
-          .footer-navbar {
-            padding: 2rem 0;
-            width: 100%;
-          }
-        }
-      }
-
-      .footer-navbar {
-        row-gap: 3rem;
-      }
-    }
-  }
-
-  @media all and (max-width: 992px) {
-    .footer-5-column {
-      .footer-navbar {
-        .footer-navbar-col {
-          width: 50%;
-        }
-      }
-    }
-  }
-
-  /* Newsletter Section  */
-  .newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .newsletter-input {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-
-  .newsletter-btn {
-    padding: 0.5rem 1rem;
-    background-color: rgb(1, 1, 1);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-
-  .newsletter-btn:hover {
-    background-color: #333;
-  }
 </style>
 
 <div class="footer-5-column">
   <div class="footer-container">
-    <div class="footer-navbar-container" style="margin-top: 0.1rem; padding-top: 0.1rem;">
+    <div class="footer-navbar-container">
       <div class="footer-company-details">
         <div class="footer-logo">
           <a href="index.php" class="logo-link">
@@ -415,7 +234,7 @@
         </div>
       </div>
 
-      <div class="footer-navbar" style="padding-left: 4rem;">
+      <div class="footer-navbar">
         <div class="footer-navbar-col">
           <h3>Quick Links</h3>
           <ul>
@@ -439,9 +258,7 @@
       </div>
     </div>
 
-    <hr>
-
-    <div class="footer-copyright" style="padding-top: 0.1rem;">
+    <div class="footer-copyright">
       <p style="text-align: center;">2025 © Health and Wellness - Made by 12, 17, 23</p>
     </div>
   </div>

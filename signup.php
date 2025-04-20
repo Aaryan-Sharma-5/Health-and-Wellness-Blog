@@ -3,14 +3,12 @@
 require "db.php";
 session_start();
 
-//get signup form data
 if (isset($_POST["submit"])) {
   $username = filter_var($_POST['username'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
   $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $confirmpassword = filter_var($_POST['confirmpassword'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  // validate form data
   if (!$username) {
     $_SESSION['signup'] = 'Please enter your Username';
   } elseif (!$email) {
@@ -20,7 +18,6 @@ if (isset($_POST["submit"])) {
   } elseif ($password !== $confirmpassword) {
     $_SESSION['signup'] = "Passwords do not match";
   } else {
-    // Check if username or email already exists
     $stmt = $connection->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
     $stmt->bind_param("ss", $username, $email);
     $stmt->execute();
@@ -31,7 +28,6 @@ if (isset($_POST["submit"])) {
     } else {
       $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-      // Insert new user into the database
       $stmt = $connection->prepare("INSERT INTO users (username, email, password, is_admin) VALUES (?, ?, ?, 0)");
       $stmt->bind_param("sss", $username, $email, $hashed_password);
       $stmt->execute();
@@ -86,7 +82,7 @@ $connection->close();
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     body {
@@ -107,7 +103,6 @@ $connection->close();
       border-radius: 20px;
     }
 
-    /* Left Side - Welcome Back */
     .left-side {
       background-color: #e0e0e0;
       width: 50%;
@@ -117,7 +112,7 @@ $connection->close();
       justify-content: center;
       align-items: center;
       text-align: center;
-      background-color: #e6e6e6; /* Updated to match image */
+      background-color: #e6e6e6;
       background-image: none;
       background-size: cover;
     }
@@ -163,22 +158,21 @@ $connection->close();
       color: #ffffff;
     }
 
-    /* Right Side - Sign Up Form */
     .right-side {
-      background-color: #000000; /* Updated to match image */
+      background-color: #000000;
       width: 50%;
       padding: 40px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      color: white; /* Added for text visibility */
+      color: white;
     }
 
     .right-side h1 {
       font-size: 2.2rem;
       margin-bottom: 40px;
       text-align: center;
-      color: #ffffff; /* Updated to match image */
+      color: #ffffff;
     }
 
     .select-container {
@@ -201,7 +195,7 @@ $connection->close();
     }
 
     .form-container {
-      background-color: #000000; /* Updated to match image */
+      background-color: #000000;
       border-radius: 10px;
       padding: 30px;
       margin-top: 20px;
@@ -261,9 +255,9 @@ $connection->close();
     }
 
     .btn-sign-up {
-      background-color: transparent; /* Updated to match image */
+      background-color: transparent;
       color: white;
-      border: 1px solid white; /* Updated to match image */
+      border: 1px solid white;
       border-radius: 25px;
       padding: 12px;
       width: 100%;
@@ -324,14 +318,11 @@ $connection->close();
 
 <body>
   <div class="container">
-    <!-- Left Side - Welcome Back -->
     <div class="left-side">
       <h1>Join the H&W Community!</h1>
       <p style="margin-bottom: 20px;">Unlock a world of trusted health tips, wellness guides, and inspiring stories. Create your free account today and take the first step toward a healthier, happier you!</p>
-
-      <!-- Logo Section -->
       <div>
-        <img src="Images/logo.png" alt="Company Logo" style="max-width: 80px; height: auto;">
+        <img src="Images/logo.png" alt="Company Logo" style="max-width: 100px; height: auto; filter: invert(1); ">
       </div>
       <div>
         <p class="signin-text" style="margin-bottom: 10px;">Already have an account? </p>
@@ -339,7 +330,6 @@ $connection->close();
       </div>
     </div>
 
-    <!-- Right Side - Sign Up Form -->
     <div class="right-side">
       <?php
       if (isset($_SESSION['signup'])): ?>

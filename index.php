@@ -13,29 +13,11 @@ include 'navbar.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: #111;
             color: #fff;
             margin: 0;
             padding: 0;
-        }
-
-        .navbar {
-            background-color: transparent !important;
-            border-bottom: none;
-        }
-
-        .nav-list li a {
-            color: #fff !important;
-            text-decoration: none;
-        }
-
-        .nav-list li a:hover {
-            color: #ccc !important;
-        }
-
-        .logo-link .logo-text {
-            color: #fff !important;
         }
 
         .carousel-wrapper {
@@ -69,7 +51,7 @@ include 'navbar.php';
         }
 
         .testimonial-card::before {
-            content: """;
+            content: "“";
             font-size: 30px;
             color: #ccc;
             position: absolute;
@@ -78,7 +60,7 @@ include 'navbar.php';
         }
 
         .testimonial-card::after {
-            content: """;
+            content: "”";
             font-size: 30px;
             color: #ccc;
             position: absolute;
@@ -272,7 +254,7 @@ include 'navbar.php';
             </div>
         </div>
     </section>
-    
+
     <hr class="divider">
 
     <section class="articles-section">
@@ -317,7 +299,7 @@ include 'navbar.php';
                     </a>
                 </div>
             </div>
-        
+
             <div class="mt-3">
                 <a href="blogs.php" class="btn btn-dark rounded-pill px-4 py-2 fw-bold">
                     View more <i class="fas fa-arrow-right ms-2"></i>
@@ -336,7 +318,7 @@ include 'navbar.php';
                     <img src="Images/Landing_Page/Landing_page_article_1.png" class="card-img-top" alt="Healthy Eating">
                     <div class="card-body">
                         <h5 class="card-title">Healthy Eating Habits</h5>
-                        <p class="card-text">Learn how to maintain a balanced diet for better health.</p>
+                        <p class="card-text">Learn how to maintain a balanced diet.</p>
                         <a href="blogs.php?category=2" class="btn btn-dark">Read More</a>
                     </div>
                 </div>
@@ -375,7 +357,7 @@ include 'navbar.php';
     </div>
 
     <hr class="divider">
-    
+
     <!-- Discussion Forum -->
     <section id="discussion" class="container py-5">
         <h2 class="section-title text-center mb-4">Discussion Forum</h2>
@@ -454,7 +436,6 @@ include 'navbar.php';
 
         renderCarousel();
 
-        // Smooth Scrolling for Navigation Links
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener("click", function(e) {
@@ -465,7 +446,6 @@ include 'navbar.php';
                 });
             });
 
-            // Discussion Forum - Posting Comments
             const postBtn = document.getElementById("postBtn");
             const discussionText = document.getElementById("discussionText");
             const discussionPosts = document.getElementById("discussionPosts");

@@ -26,7 +26,7 @@ include 'navbar.php'
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: var(--background);
       color: var(--text-color);
       margin: 0;

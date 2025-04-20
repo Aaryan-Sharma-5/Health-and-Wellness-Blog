@@ -143,9 +143,10 @@ while ($related = $relatedResult->fetch_assoc()) {
     $relatedArticles[] = $related;
 }
 
-function format_date($date_string) {
+function format_date($date_string)
+{
     if (empty($date_string)) return 'Date unavailable';
-    
+
     try {
         $date = new DateTime($date_string);
         return $date->format('F j, Y');
@@ -168,12 +169,11 @@ function format_date($date_string) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($article['title']); ?> - Wellness Blog</title>
     <style>
-        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
@@ -211,7 +211,6 @@ function format_date($date_string) {
             background-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Article styling */
         .article {
             background-color: #222;
             border-radius: 12px;
@@ -315,7 +314,6 @@ function format_date($date_string) {
             margin-bottom: 12px;
         }
 
-        /* Like button and interactions */
         .article-interactions {
             display: flex;
             justify-content: space-between;
@@ -370,7 +368,6 @@ function format_date($date_string) {
             background-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Comments section */
         .comments-section {
             margin-top: 60px;
         }
@@ -462,7 +459,6 @@ function format_date($date_string) {
             font-size: 15px;
         }
 
-        /* Related articles */
         .related-articles {
             margin-top: 70px;
         }
@@ -541,7 +537,6 @@ function format_date($date_string) {
             color: #fff;
         }
 
-        /* Login message */
         .login-message {
             display: none;
             position: fixed;
@@ -591,7 +586,6 @@ function format_date($date_string) {
             background-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Status message */
         .status-message {
             position: fixed;
             bottom: 30px;
@@ -770,20 +764,16 @@ function format_date($date_string) {
         <?php endif; ?>
     </div>
 
-    <!-- Login message popup -->
     <div class="login-message" id="loginMessage">
         <p>Please log in to like articles</p>
         <button onclick="closeLoginMessage()">OK</button>
     </div>
 
-    <!-- Status message -->
     <div class="status-message" id="statusMessage"></div>
 
     <script>
-        // Store login status client-side
         const userLoggedIn = <?php echo $user_logged_in ? 'true' : 'false'; ?>;
 
-        // Function to show status message
         function showStatus(message, duration = 2500) {
             const statusEl = document.getElementById('statusMessage');
             statusEl.textContent = message;
@@ -794,19 +784,16 @@ function format_date($date_string) {
             }, duration);
         }
 
-        // Handle like button click
         const likeButton = document.getElementById('likeButton');
         const likeCount = document.getElementById('likeCount');
 
         if (likeButton) {
             likeButton.addEventListener('click', function() {
                 if (!userLoggedIn) {
-                    // Show login message if not logged in
                     document.getElementById('loginMessage').classList.add('show');
                     return;
                 }
 
-                // Send AJAX request to like/unlike
                 fetch('article.php?id=<?php echo $article_id; ?>', {
                         method: 'POST',
                         headers: {
@@ -817,7 +804,6 @@ function format_date($date_string) {
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
-                            // Update UI
                             likeCount.textContent = data.count + ' Likes';
 
                             if (data.liked) {
@@ -830,7 +816,6 @@ function format_date($date_string) {
                                 showStatus('Like removed');
                             }
                         } else if (data.status === 'error' && data.message.includes('log in')) {
-                            // Server reports user is not logged in
                             document.getElementById('loginMessage').classList.add('show');
                         } else {
                             console.error('Error:', data.message);
@@ -844,7 +829,6 @@ function format_date($date_string) {
             });
         }
 
-        // Function to close the login message
         function closeLoginMessage() {
             document.getElementById('loginMessage').classList.remove('show');
         }

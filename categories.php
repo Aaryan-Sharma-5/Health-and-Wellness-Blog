@@ -1,42 +1,17 @@
-<?php include 'navbar.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Categories</title>
+  <title>Categories - Health and Wellness</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: #111;
       color: #fff;
       margin: 0;
       padding: 0;
-    }
-
-    body.categories-page .nav-list li a {
-      color: #fff; /* Set all links to white */
-      text-decoration: none;
-    }
-
-    body.categories-page .nav-list li a:hover {
-      color: #1f2937; /* Set hover color to black or dark blue */
-      text-decoration: none; /* Optional: Add underline on hover */
-    }
-
-    body.categories-page .logo-link .logo-text {
-      color: #fff; /* Make logo text white */
-    }
-
-    body.categories-page .navbar {
-      background-color: transparent; /* Make navbar background transparent */
-      border-bottom: none; /* Remove border */
-    }
-
-    body.categories-page .navbar-divider {
-      background-color: rgba(255, 255, 255, 0.2); /* Subtle divider */
     }
 
     .categories-container {
@@ -59,7 +34,7 @@
 
     .categories-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted min-width for better alignment */
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
 
@@ -68,22 +43,21 @@
       overflow: hidden;
       border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.3s ease;
-      aspect-ratio: 4 / 3; /* Ensures consistent aspect ratio for all cards */
+      aspect-ratio: 4/3;
     }
 
     .category-card img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Ensures the image fills the card without distortion */
+      object-fit: cover;
       transition: transform 0.3s ease;
     }
 
     .category-card:hover img {
-      transform: scale(1.1); /* Smooth zoom effect on hover */
+      transform: scale(1.1);
     }
 
-    .category-card .overlay {
+    .overlay {
       position: absolute;
       top: 0;
       left: 0;
@@ -100,115 +74,93 @@
       background: rgba(0, 0, 0, 0.7);
     }
 
-    .category-card .overlay h3 {
+    .overlay h3 {
       color: #fff;
       font-size: 1.5rem;
       text-transform: uppercase;
       text-align: center;
+      margin: 0;
     }
-
   </style>
 </head>
 
-<body class="categories-page">
+<body>
+
+  <?php include 'navbar.php' ?>
+
   <div class="categories-container">
     <h1>Explore Our Categories</h1>
-    <p>Wellness is a holistic approach to health that encompasses physical, mental, and emotional well-being.</p>
+    <p>At Health and Wellness (H&W), we've curated a variety of topics to help you live a healthier, more balanced life.
+      Explore the categories and find inspiration that fits your journey.</p>
 
     <div class="categories-grid">
-      <!-- Category Card 1 -->
-      <div class="category-card">
-        <a href="blogs.php?category=1">
-          <img src="Images\Categories\Category_1.jpg" alt="Mental Health">
-          <div class="overlay">
-            <h3>Mental Health</h3>
-          </div>
-        </a>
-      </div>
+      <a href="blogs.php?category=1" class="category-card">
+        <img src="Images/Categories/Category_1.jpg" alt="Mental Health" loading="lazy">
+        <div class="overlay">
+          <h3>Mental Health</h3>
+        </div>
+      </a>
 
-      <!-- Category Card 2 -->
-      <div class="category-card">
-        <a href="blogs.php?category=2">
-          <img src="Images\Categories\Category_2.jpg" alt="Food Habits">
-          <div class="overlay">
-            <h3>Food Habits</h3>
-          </div>
-        </a>
-      </div>
+      <a href="blogs.php?category=2" class="category-card">
+        <img src="Images/Categories/Category_2.jpg" alt="Food Habits" loading="lazy">
+        <div class="overlay">
+          <h3>Food Habits</h3>
+        </div>
+      </a>
 
-      <!-- Category Card 3 -->
-      <div class="category-card">
-        <a href="blogs.php?category=3">
-          <img src="Images\Categories\Category_3.jpg" alt="Gym and Fitness">
-          <div class="overlay">
-            <h3>Gym and Fitness</h3>
-          </div>
-        </a>
-      </div>
+      <a href="blogs.php?category=3" class="category-card">
+        <img src="Images/Categories/Category_3.jpg" alt="Gym and Fitness" loading="lazy">
+        <div class="overlay">
+          <h3>Gym and Fitness</h3>
+        </div>
+      </a>
 
-      <!-- Category Card 4 -->
-      <div class="category-card">
-        <a href="blogs.php?category=4">
-          <img src="Images\Categories\Category_4.jpg" alt="Sleeping Habits">
-          <div class="overlay">
-            <h3>Sleeping Habits</h3>
-          </div>
-        </a>
-      </div>
+      <a href="blogs.php?category=4" class="category-card">
+        <img src="Images/Categories/Category_4.jpg" alt="Sleeping Habits" loading="lazy">
+        <div class="overlay">
+          <h3>Sleeping Habits</h3>
+        </div>
+      </a>
 
-      <!-- Category Card 5 -->
-      <div class="category-card">
-        <a href="blogs.php?category=5">
-          <img src="Images\Categories\Category_5.png" alt="Longevity">
-          <div class="overlay">
-            <h3>Longevity</h3>
-          </div>
-        </a>
-      </div>
+      <a href="blogs.php?category=5" class="category-card">
+        <img src="Images/Categories/Category_5.png" alt="Longevity" loading="lazy">
+        <div class="overlay">
+          <h3>Longevity</h3>
+        </div>
+      </a>
 
-      <!-- Category Card 6 -->
-      <div class="category-card">
-        <a href="blogs.php?category=6">
-          <img src="Images\Categories\Category_6.png" alt="Sexual Health">
-          <div class="overlay">
-            <h3>Sexual Health</h3>
-          </div>
-        </a>
-      </div>
+      <a href="blogs.php?category=6" class="category-card">
+        <img src="Images/Categories/Category_6.png" alt="Sexual Health" loading="lazy">
+        <div class="overlay">
+          <h3>Sexual Health</h3>
+        </div>
+      </a>
 
-      <!-- Category Card 7 -->
-      <div class="category-card">
-        <a href="blogs.php?category=7">
-          <img src="Images\Categories\Category_7.png" alt="Parenting">
-          <div class="overlay">
-            <h3>Parenting</h3>
-          </div>
-        </a>
-      </div>
+      <a href="blogs.php?category=7" class="category-card">
+        <img src="Images/Categories/Category_7.png" alt="Parenting" loading="lazy">
+        <div class="overlay">
+          <h3>Parenting</h3>
+        </div>
+      </a>
 
-      <!-- Category Card 8 -->
-      <div class="category-card">
-        <a href="blogs.php?category=8">
-          <img src="Images\Categories\Category_8.png" alt="Spiritual Health">
-          <div class="overlay">
-            <h3>Spiritual Health</h3>
-          </div>
-        </a>
-      </div>
+      <a href="blogs.php?category=8" class="category-card">
+        <img src="Images/Categories/Category_8.png" alt="Spiritual Health" loading="lazy">
+        <div class="overlay">
+          <h3>Spiritual Health</h3>
+        </div>
+      </a>
 
-      <!-- Category Card 9 -->
-      <div class="category-card">
-        <a href="blogs.php?category=9">
-          <img src="Images\Categories\Category_9.jpg" alt="Disease Management">
-          <div class="overlay">
-            <h3>Disease Management</h3>
-          </div>
-        </a>
-      </div>
+      <a href="blogs.php?category=9" class="category-card">
+        <img src="Images/Categories/Category_9.jpg" alt="Disease Management" loading="lazy">
+        <div class="overlay">
+          <h3>Disease Management</h3>
+        </div>
+      </a>
     </div>
   </div>
 
-  <?php include 'footer.php'; ?>
+  <?php include 'footer.php' ?>
+
 </body>
 
 </html>

@@ -164,29 +164,6 @@ function getCategoryName($category_id)
             line-height: 1.5;
         }
 
-        /* Navigation styles for dark theme */
-        body.blogs-page .nav-list li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        body.blogs-page .nav-list li a:hover {
-            color: #1f2937;
-            text-decoration: none;
-        }
-
-        body.blogs-page .logo-link .logo-text {
-            color: #fff;
-        }
-
-        body.blogs-page .navbar {
-            background-color: transparent;
-            border-bottom: none;
-        }
-
-        body.blogs-page .navbar-divider {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
 
         .main-content {
             max-width: 1200px;

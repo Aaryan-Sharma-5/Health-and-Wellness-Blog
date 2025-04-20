@@ -11,19 +11,21 @@ if (session_status() == PHP_SESSION_NONE) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navbar</title>
   <script src="https://kit.fontawesome.com/57a5630a3c.js" crossorigin="anonymous"></script>
   <style>
-    /* General Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --black: #ffffff;
+      --white: #000000;
+      --box-shadow: 0 4px 20px rgba(255, 255, 255, 0.08);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     .navbar {
-      background-color: white;
-      border-bottom: 1px solid #d1d5db;
+      background-color: #000000;
+      border-bottom: 1px solid #2a2e33;
       font-family: Arial, sans-serif;
     }
 
@@ -38,7 +40,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
     .navbar-divider {
       height: 1px;
-      background-color: #d1d5db;
+      background-color: #2a2e33;
       margin: 0;
     }
 
@@ -50,6 +52,7 @@ if (session_status() == PHP_SESSION_NONE) {
     }
 
     .logo-img {
+      filter: invert(1);
       height: 3rem;
     }
 
@@ -57,104 +60,94 @@ if (session_status() == PHP_SESSION_NONE) {
       font-size: 1.5rem;
       font-weight: 600;
       white-space: nowrap;
-      color: #1f2937;
-    }
-
-    .user-section {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      color: #e0e0e0;
     }
 
     .user-btn {
-      border: 0.9px solid rgb(98, 98, 98);
-      border-radius: 100px;
-      padding: 0.25rem;
-      height: 3rem;
-      width: 3rem;
+      border: 0.9px solid rgb(157, 157, 157);
+      border-radius: 50%;
+      padding: 0;
+      height: 42px;
+      width: 42px;
       cursor: pointer;
+      background-color: #121212;
+      color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .user-avatar {
+      width: 100%;
+      height: 100%;
+      background-color: var(--black);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
     }
 
     .dropdown-menu {
       display: none;
       position: absolute;
       margin-top: 1rem;
-      background-color: white;
+      background-color: #121212;
       border-radius: 0.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
       overflow: hidden;
       z-index: 50;
       min-width: 12rem;
+      list-style-type: none;
+      padding: 0;
     }
 
     .dropdown-header {
       padding: 1rem;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid #2a2e33;
     }
 
     .user-name {
-      display: block;
       font-size: 0.875rem;
-      color: #111827;
+      color: #e0e0e0;
     }
 
-    .dropdown-list {
-      list-style: none;
-    }
-
-    .dropdown-list li a {
+    .dropdown-menu li a {
       display: block;
       padding: 0.5rem 1rem;
       font-size: 0.875rem;
-      color: #374151;
+      color: #c0c0c0;
       text-decoration: none;
     }
 
-    .dropdown-list li a:hover {
-      background-color: #f3f4f6;
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    .menu-icon {
-      width: 1.25rem;
-      height: 1.25rem;
-      color: #6b7280;
-    }
-
-    .nav-links {
-      flex: 1;
-      display: flex;
-      justify-content: center;
+    .dropdown-menu li a:hover {
+      background-color: #1a1a1a;
     }
 
     .nav-list {
       list-style: none;
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1rem;
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
     }
 
     .nav-list li a {
       text-decoration: none;
       padding: 0.5rem 1rem;
-      color: #111827;
+      color: #e0e0e0;
       display: block;
     }
 
     .nav-list li a:hover {
-      background-color: #f3f4f6;
+      background-color: #1a1a1a;
     }
 
     .nav-list li a.active {
-      color: #2563eb;
-      background-color: #eff6ff;
+      color: #5a9cff;
+      background-color: #1a2235;
       border-radius: 0.25rem;
     }
 
@@ -167,84 +160,24 @@ if (session_status() == PHP_SESSION_NONE) {
     }
 
     .nav__profile:hover .user-btn {
-      background-color: #f3f4f6;
+      background-color: #1a1a1a;
     }
 
-    .nav__profile:hover .user-btn i {
-      color: #2563eb;
-    }
-
-    .alert {
-      padding: 1rem;
-      margin: 1rem auto;
-      max-width: 80%;
-      border-radius: 5px;
-      font-size: 1rem;
-      text-align: center;
-    }
-
-    .alert-success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-
-    .alert-error {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-      padding: 1rem;
-      margin: 1rem auto;
-      max-width: 80%;
-      border-radius: 5px;
-      font-size: 1rem;
-      text-align: center;
-    }
-
-    /* Responsive */
-    @media (min-width: 768px) {
-      .menu-toggle {
-        display: none;
-      }
-
-      .nav-links {
-        display: block;
-        width: auto;
-      }
-
+    @media (max-width: 768px) {
       .nav-list {
-        margin-left: 35%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-top: 0;
-        gap: 2rem;
+        margin-left: 0;
+        gap: 1rem;
       }
 
       .dropdown-menu {
-        position: absolute;
-        right: 1rem;
-        top: 4rem;
+        right: 0;
       }
     }
   </style>
 </head>
 
 <body>
-  <?php if (isset($_SESSION['signin-success'])) : ?>
-    <div class="alert alert-success">
-      <?= htmlspecialchars($_SESSION['signin-success']); ?>
-    </div>
-    <?php unset($_SESSION['signin-success']); ?>
-  <?php endif; ?>
-  <?php if (isset($_SESSION['signin-error'])) : ?>
-    <div class="alert alert-error">
-      <?= htmlspecialchars($_SESSION['signin-error']); ?>
-    </div>
-    <?php unset($_SESSION['signin-error']); ?>
-  <?php endif; ?>
-
-  <nav>
+  <nav class="navbar">
     <div class="navbar-container">
       <a href="index.php" class="logo-link">
         <img src="Images/logo.png" class="logo-img" alt="Logo">
@@ -257,8 +190,10 @@ if (session_status() == PHP_SESSION_NONE) {
         <li><a href="categories.php">Categories</a></li>
         <?php if (isset($_SESSION['user-id'])) : ?>
           <li class="nav__profile">
-            <button class="user-btn avatar" id="user-menu-button">
-              <i class="fa-solid fa-user fa-2x"></i>
+            <button class="user-btn" id="user-menu-button">
+              <div class="user-avatar">
+                <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
+              </div>
             </button>
 
             <ul class="dropdown-menu" id="user-dropdown">
@@ -274,6 +209,7 @@ if (session_status() == PHP_SESSION_NONE) {
           <li><a href="signin.php">SignIn</a></li>
         <?php endif ?>
       </ul>
+    </div>
   </nav>
   <div class="navbar-divider"></div>
 
@@ -290,20 +226,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
         document.addEventListener('click', function() {
           dropdownMenu.style.display = 'none';
-        });
-      }
-
-      const openNavBtn = document.getElementById('open__nav-btn');
-      const closeNavBtn = document.getElementById('close__nav-btn');
-      const navContainer = document.querySelector('.navbar-container');
-
-      if (openNavBtn && closeNavBtn && navContainer) {
-        openNavBtn.addEventListener('click', function() {
-          navContainer.classList.add('show');
-        });
-
-        closeNavBtn.addEventListener('click', function() {
-          navContainer.classList.remove('show');
         });
       }
     });

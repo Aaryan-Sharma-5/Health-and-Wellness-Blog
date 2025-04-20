@@ -1,37 +1,36 @@
 <?php include 'navbar.php'; ?>
-
+<title>Contact Us</title>
 <style>
   body.contact-page {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #111;
     color: #fff;
     margin: 0;
     padding: 0;
     line-height: 1.6;
   }
-  
-  /* Navigation styling for this page */
+
   body.contact-page .nav-list li a {
-    color: #fff; /* Set all links to white */
+    color: #fff;
     text-decoration: none;
   }
 
   body.contact-page .nav-list li a:hover {
-    color: #1f2937; /* Match hover color from categories page */
+    color: #1f2937;
     text-decoration: none;
   }
 
   body.contact-page .logo-link .logo-text {
-    color: #fff; /* Make logo text white */
+    color: #fff;
   }
 
   body.contact-page .navbar {
-    background-color: transparent; /* Make navbar background transparent */
-    border-bottom: none; /* Remove border */
+    background-color: transparent;
+    border-bottom: none;
   }
 
   body.contact-page .navbar-divider {
-    background-color: rgba(255, 255, 255, 0.2); /* Subtle divider */
+    background-color: rgba(255, 255, 255, 0.2);
   }
 
   .contact-section {
@@ -89,7 +88,8 @@
     color: #fff;
   }
 
-  .contact-card p, .contact-card a {
+  .contact-card p,
+  .contact-card a {
     font-size: 1rem;
     color: #ccc;
     margin-bottom: 0.5rem;
@@ -135,7 +135,7 @@
     .contact-methods {
       grid-template-columns: 1fr;
     }
-    
+
     .contact-header h1 {
       font-size: 2rem;
     }
@@ -147,7 +147,7 @@
     <div class="contact-header">
       <h1>Get in Touch with Us</h1>
       <p>We'd love to hear from you! Whether you have questions, feedback, or just want to say hello, feel free to reach out.
-      Your journey to better health matters to us — and we're here to support you every step of the way.</p>
+        Your journey to better health matters to us — and we're here to support you every step of the way.</p>
     </div>
 
     <div class="contact-methods">
@@ -157,7 +157,7 @@
         <p><a href="mailto:support@healthandwellness.com">support@healthandwellness.com</a></p>
         <p>We respond to all inquiries within 24 hours</p>
       </div>
-      
+
       <div class="contact-card">
         <div class="contact-icon">📱</div>
         <h3>Call Us</h3>
@@ -165,7 +165,7 @@
         <p>Available Monday to Friday, 9AM - 5PM IST</p>
       </div>
     </div>
-    
+
     <div class="support-note">
       <p>If you're reaching out for mental health support, know that you are not alone.</p>
       <p>Visit <a href="https://www.wannatalkaboutit.com/in/13-reasons-why/#support" target="_blank">wannatalkaboutit.com</a> for guidance, or contact us directly — we're here for you.</p>
