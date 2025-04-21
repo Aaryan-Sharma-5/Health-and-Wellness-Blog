@@ -146,27 +146,33 @@ function getCategoryName($category_id)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $category ? getCategoryName($category) . " Blogs" : "Blog Posts"; ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <style>
-        * {
+        .blogs-page {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
+        /* Navbar height fix */
+        .navbar {
+            min-height: 50px;
+        }
+
+        .navbar-container {
+            min-height: inherit;
+        }
+
+
         body {
-            font-family: Arial, sans-serif;
             background-color: #111;
             color: #fff;
-            margin: 0;
-            padding: 0;
             line-height: 1.5;
         }
 
 
         .main-content {
-            max-width: 1200px;
+            max-width: 80%;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -228,18 +234,29 @@ function getCategoryName($category_id)
             color: #fff;
             background-color: #333;
             transition: background-color 0.3s ease;
-            text-decoration: none; /* Remove underline */
+            text-decoration: none;
         }
 
         .tag:hover {
             background-color: #444;
-            text-decoration: none; /* Ensure no underline on hover */
+            text-decoration: none;
         }
 
-        .product { background-color: #1a1a1a; }
-        .case-study { background-color: #2a2a2a; }
-        .opinion { background-color: #3a3a3a; }
-        .ui-theory { background-color: #4a4a4a; }
+        .product {
+            background-color: #1a1a1a;
+        }
+
+        .case-study {
+            background-color: #2a2a2a;
+        }
+
+        .opinion {
+            background-color: #3a3a3a;
+        }
+
+        .ui-theory {
+            background-color: #4a4a4a;
+        }
 
         .author {
             display: flex;
@@ -258,7 +275,8 @@ function getCategoryName($category_id)
             align-items: center;
         }
 
-        .comments svg, .like-button svg {
+        .comments svg,
+        .like-button svg {
             width: 18px;
             height: 18px;
             margin-right: 6px;
@@ -413,7 +431,7 @@ function getCategoryName($category_id)
             opacity: 0.5;
             pointer-events: none;
         }
-        
+
         h2.section-title {
             text-align: center;
             margin-bottom: 2rem;
@@ -421,10 +439,20 @@ function getCategoryName($category_id)
             font-weight: 600;
             color: #fff;
         }
-        
+
         .date-info {
             font-size: 0.8rem;
             color: #777;
+        }
+
+        .custom-alert {
+            background-color: #222;
+            color: #ccc;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid #444;
+            text-align: center;
         }
     </style>
 </head>
@@ -481,15 +509,15 @@ function getCategoryName($category_id)
                                 </span>
                                 <span class="time"><?php echo $time_ago; ?></span>
                                 <span class="date-info">
-                                <?php
-                                echo "Published: " . format_date($row['created_at']);
-                                if (isset($row['updated_at']) && $row['updated_at'] != $row['created_at']) {
-                                    echo " (Updated: " . format_date($row['updated_at']) . ")";
-                                }
-                                ?>
+                                    <?php
+                                    echo "Published: " . format_date($row['created_at']);
+                                    if (isset($row['updated_at']) && $row['updated_at'] != $row['created_at']) {
+                                        echo " (Updated: " . format_date($row['updated_at']) . ")";
+                                    }
+                                    ?>
                                 </span>
                                 <span class="like-button" data-article-id="<?php echo $row["article_id"]; ?>">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="<?php echo (isset($_SESSION['user_id']) && check_if_liked($row["article_id"], $_SESSION['user_id'])) ? 'currentColor' : 'none'; ?>" stroke="currentColor" stroke-width="2" class="like-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="<?php echo (isset($_SESSION['user-id']) && check_if_liked($row["article_id"], $_SESSION['user-id'])) ? 'currentColor' : 'none'; ?>" stroke="currentColor" stroke-width="2" class="like-icon">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                                     </svg>
                                     <span class="like-count"><?php echo $row["likes_count"]; ?></span>
@@ -510,7 +538,7 @@ function getCategoryName($category_id)
             <?php
                 }
             } else {
-                echo '<div class="alert alert-dark mt-3">No articles found matching these criteria</div>';
+                echo '<div class="custom-alert">No articles found matching these criteria</div>';
             }
             ?>
         </div>

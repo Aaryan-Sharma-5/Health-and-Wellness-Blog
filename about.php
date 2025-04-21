@@ -34,29 +34,6 @@ include 'navbar.php'
       line-height: 1.8;
     }
 
-    body.about-page .nav-list li a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    body.about-page .nav-list li a:hover {
-      color: #1f2937;
-      text-decoration: none;
-    }
-
-    body.about-page .logo-link .logo-text {
-      color: #fff;
-    }
-
-    body.about-page .navbar {
-      background-color: transparent;
-      border-bottom: none;
-    }
-
-    body.about-page .navbar-divider {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
     .container {
       max-width: 1200px;
       margin: 40px auto;
@@ -232,6 +209,7 @@ include 'navbar.php'
     }
 
     @media (max-width: 768px) {
+
       .offerings,
       .membership-options {
         flex-direction: column;
